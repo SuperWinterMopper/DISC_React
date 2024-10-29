@@ -1,25 +1,141 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useState, useEffect } from "react";
 
 function App() {
+  function spiritIcon() {
+    return (
+      <figure class="spirit-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 70 70" fill="none">
+            <circle cx="35.5" cy="35.5" r="35.5" fill="#FFBD12"/>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="43" height="43" viewBox="0 0 43 43" fill="none">
+            <path d="M29.6609 0.199997H13.3395L0.200195 13.3393V29.6607L13.3395 42.8H29.6609L42.8002 29.6607V13.3393L29.6609 0.199997ZM15.5978 29.866L7.18045 21.4487L15.5978 13.0313C18.78 9.84915 24.0152 9.84915 27.1973 13.0313L35.6147 21.4487L27.1973 29.866C24.0152 33.0482 18.8826 33.0482 15.5978 29.866Z" fill="#201B21"/>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="17" viewBox="0 0 11 17" fill="none">
+            <path d="M0.943001 4.32875H0.766602V7.19834H4.23575C4.55915 7.19834 4.67675 7.64209 4.38275 7.79L3.70656 8.11542C2.79517 8.55917 1.88379 8.79583 0.943001 8.79583H0.766602V11.6654H4.14756C4.47095 11.6654 4.58855 12.1092 4.29455 12.2571L3.58897 12.5825C2.73638 12.9967 1.82499 13.2037 0.943001 13.2037H0.766602V16.0733H4.14756L4.52975 15.6C6.17613 13.6771 8.0871 12.6713 10.0863 12.6713H10.2333V9.80167H6.85231C6.52892 9.80167 6.41132 9.35791 6.70532 9.21L7.41091 8.88458C8.2635 8.47042 9.17489 8.26333 10.0569 8.26333H10.2039V5.39375H6.76412C6.44072 5.39375 6.32312 4.95 6.61712 4.80208L7.29331 4.47667C8.2047 4.03292 9.11609 3.79625 10.0569 3.79625H10.2039V0.926666H6.82292L6.44072 1.4C4.85314 3.32292 2.91277 4.32875 0.943001 4.32875Z" fill="#201B21"/>
+        </svg>                                    
+      </figure>
+    )
+  }
+  function profileIcon() {
+    return( 
+      <figure class="nav-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="43" height="43" viewBox="0 0 43 43" fill="none">
+              <circle cx="21.5" cy="21.5" r="20" fill="#EEEFF4" stroke="#474A57" stroke-width="2"/>
+          </svg>  
+          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+              <path d="M20.6663 21.6875C20.6663 18.8685 17.01 16.5833 12.4997 16.5833C7.98935 16.5833 4.33301 18.8685 4.33301 21.6875M12.4997 13.5208C9.68072 13.5208 7.39551 11.2356 7.39551 8.41667C7.39551 5.59771 9.68072 3.3125 12.4997 3.3125C15.3186 3.3125 17.6038 5.59771 17.6038 8.41667C17.6038 11.2356 15.3186 13.5208 12.4997 13.5208Z" stroke="#474A57" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+      </figure>
+    )
+  }
+  function searchIcon() {
+    return (
+      <figure class="nav-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="43" height="43" viewBox="0 0 43 43" fill="none">
+              <g clip-path="url(#clip0_127_460)">
+              <rect x="1.5" y="1.5" width="39" height="40" rx="7" fill="#FFBD12" stroke="#18191F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+              <defs>
+              <clipPath id="clip0_127_460">
+                  <rect width="42" height="42" fill="white" transform="translate(0.5 0.5)"/>
+              </clipPath>
+              </defs>
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+              <path d="M13.25 13.75L19.375 19.875M8.14583 15.7917C4.1993 15.7917 1 12.5924 1 8.64583C1 4.6993 4.1993 1.5 8.14583 1.5C12.0924 1.5 15.2917 4.6993 15.2917 8.64583C15.2917 12.5924 12.0924 15.7917 8.14583 15.7917Z" stroke="#18191F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+      </figure>
+    )
+  }
+  function messageIcon() {
+    return (
+      <figure class="nav-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44" fill="none">
+            <g clip-path="url(#clip0_127_470)">
+            <circle cx="21" cy="21.8462" r="20" fill="#EEEFF4" stroke="#18191F" stroke-width="2"/>
+        </g>
+        <defs>
+            <clipPath id="clip0_127_470">
+                <rect width="43.5292" height="43.3846" fill="white" transform="translate(0 0.615402)"/>
+            </clipPath>
+        </defs>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14" fill="none">
+            <g clip-path="url(#clip0_106_34)">
+                <path d="M12.9157 6.99992H3.84115" stroke="#474A57" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12.9158 7.00003L1.77891 12.3623L3.8413 7.00003L1.77891 1.6378L12.9158 7.00003Z" stroke="#474A57" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </g>
+                <defs>
+                <clipPath id="clip0_106_34">
+                    <rect width="14" height="14" fill="white" transform="translate(0.5)"/>
+                </clipPath>
+            </defs>
+        </svg>  
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14" fill="none">
+            <circle cx="7.5" cy="7" r="6" fill="#F95A2C" stroke="white" stroke-width="2"/>
+        </svg>    
+      </figure>
+    )
+  }
+  function searchFieldContent() {
+    return( 
+      <div class="search-field">
+        <h1>Search</h1>
+        <div class="search-bar">
+            <h2>Search based on your preferences...</h2>
+            <div class="magnifying-glass">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="#18191F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M20.9999 21L16.6499 16.65" stroke="#18191F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>                        
+            </div>
+        </div>
+        <div class="recommended"><h2>Recommended:</h2></div>  
+      </div>
+    )
+  }
+
+  function navbarButton(props) {
+    return ( 
+      <button>
+        {props.icon}
+        <p>{props.text}</p>
+      </button>
+    )
+  }
+  
+  function user(props) {
+    return (
+      <div class="user">
+        <img class="user-icon" src={props.iconLink} alt="User Icon"/>
+        <div class="user-info">
+            <h3>{props.name}</h3>
+            <h4 id="plus-80-match">{props.matchness}% match</h4>
+        </div>
+        <button class="follow-button" id="followed-user">{props.follow}</button>
+      </div>
+    )
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload. Here's some changes to hw-4.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <body>
+      <section className='desktop-section'>
+        <nav-bar>
+          {spiritIcon()}
+          {navbarButton({ text: "Profile", icon : profileIcon()})}
+          {navbarButton({ text: "Search", icon : searchIcon()})}
+          {navbarButton({ text: "Message", icon : messageIcon()})}
+        </nav-bar>
+        <section className='search-container'>
+          {searchFieldContent()}
+          <div class="users-field">
+
+          </div>
+        </section>
+      </section>
+    </body>
+  ); 
 }
 
 export default App;
