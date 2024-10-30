@@ -1,6 +1,20 @@
 import './App.css';
 import React, { useState, useEffect } from "react";
 
+const profiles = [
+  {username: "acton healy", matchness: 96, follow: "Following", iconLink: "https://resources.tidal.com/images/0843b27b/4466/4c7f/bfd6/4df4507cdf2a/640x640.jpg"},
+  {username: "amazingella", matchness: 92, follow: "Follow", iconLink: "https://resources.tidal.com/images/6b95de51/316d/4c53/9f10/5261a9e3bac0/640x640.jpg"},
+  {username: "The Scream", matchness: 86, follow: "Follow", iconLink: "https://resources.tidal.com/images/2fa97549/1898/494f/a4bc/0e09d0a25a6e/640x640.jpg"},
+  {username: "jesuscrhistthethird", matchness: 81, follow: "Follow", iconLink: "https://resources.tidal.com/images/86799671/a18c/4a8b/935a/3f7e1ac97f39/640x640.jpg"},
+  {username: "fred", matchness: 74, follow: "Follow", iconLink: "https://resources.tidal.com/images/6cdffdfa/3819/4fcb/b961/56da72a7f3db/640x640.jpg"},
+  {username: "GG.Nguyen", matchness: 64, follow: "Following", iconLink: "https://resources.tidal.com/images/2398c977/48e5/44da/97c2/25da8c9c1869/640x640.jpg"},
+  {username: "selectperson", matchness: 52, follow: "Follow", iconLink: "https://resources.tidal.com/images/96b5aae4/33ff/4ff7/9d84/fe3a6f17137b/640x640.jpg"},
+  {username: "trashcan", matchness: 46, follow: "Follow", iconLink: "https://resources.tidal.com/images/c6448675/7103/45f3/a1d2/6085f3b5f59e/640x640.jpg"},
+  {username: "Luciferan Towers", matchness: 34, follow: "Follow", iconLink: "https://resources.tidal.com/images/17024b49/483a/418f/af81/b5bc8cbb5469/320x320.jpg"},
+  {username: "lisa", matchness: 29, follow: "Follow", iconLink: "https://resources.tidal.com/images/0c3de7f6/d0a6/4d51/8344/1f110bfd8c27/320x320.jpg"},
+  {username: "elder", matchness: 9, follow: "Following", iconLink: "https://resources.tidal.com/images/e5685e43/c607/4a8a/8bec/86a9dd5648ad/320x320.jpg"}
+]
+
 function App() {
   function spiritIcon() {
     return (
@@ -104,13 +118,13 @@ function App() {
       </button>
     )
   }
-  
+
   function user(props) {
     return (
       <div class="user">
         <img class="user-icon" src={props.iconLink} alt="User Icon"/>
         <div class="user-info">
-            <h3>{props.name}</h3>
+            <h3>{props.username}</h3>
             <h4 id="plus-80-match">{props.matchness}% match</h4>
         </div>
         <button class="follow-button" id="followed-user">{props.follow}</button>
@@ -130,9 +144,12 @@ function App() {
         <section className='search-container'>
           {searchFieldContent()}
           <div class="users-field">
-
+            {profiles.map(u => user({username: u.username, matchness: u.matchness, follow: u.follow, iconLink : u.iconLink}))}
           </div>
         </section>
+        <footer>
+          <h5>Spirit</h5>
+        </footer>
       </section>
     </body>
   ); 
