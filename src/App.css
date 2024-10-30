@@ -82,6 +82,8 @@
 
     nav-bar button:hover {
         cursor: pointer;
+        background-color: rgb(221, 221, 221);
+        border: 1px solid rgb(186, 186, 186);
     }
 
     nav-bar .nav-icon {
@@ -120,16 +122,16 @@
         font-size: 15px;
         font-style: normal;
         font-weight: 700;
-        line-height: 20px; /* 133.333% */
-        }
+        line-height: 20px; 
+    }
 
     nav-bar #selected {
-        color: var(--main-black);
+        color: black;
     }
 
     .search-container {
         margin-bottom: 300px;
-        flex: 1 1 auto;  /* grow, shrink, and auto basis */
+        flex: 1 1 auto;  
     }
 
     .search-container .search-field {
@@ -158,6 +160,10 @@
         align-items: center;
         box-shadow: 0px 4px 0px 0px #18191F;  
         min-width: 220px;     
+    }
+
+    .search-container .search-field .search-bar:hover {
+        background-color: rgb(218, 218, 218);
     }
 
     .search-container .search-field .search-bar h2 {
@@ -193,6 +199,10 @@
     .search-container .search-field .search-bar input::placeholder {
         font-weight: 500;
     }    
+
+    .search-container .search-field .search-bar:hover input {
+        background-color: rgb(218, 218, 218);
+    }
 
     .search-container .recommended {
         width: 30%;
@@ -237,9 +247,9 @@
         position: relative;
     }
 
-    .search-container .users-field .user:hover {
-        cursor: pointer;
-    }
+        .search-container .users-field .user:hover {
+            cursor: pointer;
+        }
 
     .search-container .users-field .user .user-icon {
         width: 185px;
@@ -299,10 +309,21 @@
         color: var(--main-black);
     }
 
+    .search-container .users-field .user #unfollowed:hover {
+        background-color: #3962e6;
+        ;
+    }
+
     .search-container .users-field .user #followed {
         background-color: var(--main-black);
         color: var(--main-white);
     }
+
+    .search-container .users-field .user #followed:hover {
+        background-color: rgb(43, 43, 43);
+        color: var(--main-white);
+    }
+
 
     footer {
         display: flex;
