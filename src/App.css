@@ -24,12 +24,16 @@
         background-color: var(--main-yellow);
         display: flex;
         flex-direction: row;
+        overflow-x: hidden;
     }
 
     .desktop-section {
         background-color: var(--main-yellow);
         display: flex;
         flex-direction: row;
+        width: 100%;
+        height: 100%;
+        min-width: 100vw; 
     }
 
     nav-bar {
@@ -124,8 +128,8 @@
     }
 
     .search-container {
-        width: 100%;
         margin-bottom: 300px;
+        flex: 1 1 auto;  /* grow, shrink, and auto basis */
     }
 
     .search-container .search-field {
@@ -160,7 +164,6 @@
         margin: 2px 0 0 16px;
         color: var(--Colors-Black, #18191F);
         font-feature-settings: 'liga' off, 'clig' off;
-        /* 13 - Medium */
         font-size: 17px;
         font-style: normal;
         font-weight: 500;
@@ -171,6 +174,25 @@
         margin: 0 16px 0 auto;
         display: flex;
     }
+
+    .search-container .search-field .search-bar input {
+        margin: 2px 0 0 16px;
+        width: 100%;
+        height: 94%;
+        border-radius: 80px;
+        color: var(--main-black);
+        font-feature-settings: 'liga' off, 'clig' off;
+        font-size: 17px;
+        font-style: normal;
+        font-weight: 900;
+        line-height: 18px; 
+        outline: none;
+        border: none;
+    }
+
+    .search-container .search-field .search-bar input::placeholder {
+        font-weight: 500;
+    }    
 
     .search-container .recommended {
         width: 30%;
@@ -200,6 +222,8 @@
         gap: 24px;
         justify-content: left; 
         margin: 0 50px 0 50px;
+        width: 100%;
+        flex: 1 1 auto;
     }
 
     .search-container .users-field .user {
@@ -255,7 +279,6 @@
         width: 212px;
         height: 75px;
         flex-shrink: 0;
-        background-color: var(--main-blue);
         border: none;
         border-top: 2px solid var(--main-black);
         stroke-width: 2px;
@@ -263,20 +286,20 @@
         margin: 0 0 0 0;
         position: absolute;
         bottom: 0;  
-        color: var(--main-black);
         font-feature-settings: 'liga' off, 'clig' off;
         font-size: 15px;
         font-style: normal;
         font-weight: 800;
         line-height: 20px;
-    }
-
-    .search-container .users-field .user .follow-button {
         cursor: pointer;
     }
 
+    .search-container .users-field .user #unfollowed {
+        background-color: var(--main-blue);
+        color: var(--main-black);
+    }
 
-    .search-container .users-field .user #followed-user {
+    .search-container .users-field .user #followed {
         background-color: var(--main-black);
         color: var(--main-white);
     }

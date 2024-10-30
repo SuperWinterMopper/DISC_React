@@ -1,21 +1,37 @@
 import './App.css';
 import React, { useState, useEffect } from "react";
 
-const profiles = [
-  {username: "acton healy", matchness: 96, follow: "Following", iconLink: "https://resources.tidal.com/images/0843b27b/4466/4c7f/bfd6/4df4507cdf2a/640x640.jpg"},
-  {username: "amazingella", matchness: 92, follow: "Follow", iconLink: "https://resources.tidal.com/images/6b95de51/316d/4c53/9f10/5261a9e3bac0/640x640.jpg"},
-  {username: "The Scream", matchness: 86, follow: "Follow", iconLink: "https://resources.tidal.com/images/2fa97549/1898/494f/a4bc/0e09d0a25a6e/640x640.jpg"},
-  {username: "jesuscrhistthethird", matchness: 81, follow: "Follow", iconLink: "https://resources.tidal.com/images/86799671/a18c/4a8b/935a/3f7e1ac97f39/640x640.jpg"},
-  {username: "fred", matchness: 74, follow: "Follow", iconLink: "https://resources.tidal.com/images/6cdffdfa/3819/4fcb/b961/56da72a7f3db/640x640.jpg"},
-  {username: "GG.Nguyen", matchness: 64, follow: "Following", iconLink: "https://resources.tidal.com/images/2398c977/48e5/44da/97c2/25da8c9c1869/640x640.jpg"},
-  {username: "selectperson", matchness: 52, follow: "Follow", iconLink: "https://resources.tidal.com/images/96b5aae4/33ff/4ff7/9d84/fe3a6f17137b/640x640.jpg"},
-  {username: "trashcan", matchness: 46, follow: "Follow", iconLink: "https://resources.tidal.com/images/c6448675/7103/45f3/a1d2/6085f3b5f59e/640x640.jpg"},
-  {username: "Luciferan Towers", matchness: 34, follow: "Follow", iconLink: "https://resources.tidal.com/images/17024b49/483a/418f/af81/b5bc8cbb5469/320x320.jpg"},
-  {username: "lisa", matchness: 29, follow: "Follow", iconLink: "https://resources.tidal.com/images/0c3de7f6/d0a6/4d51/8344/1f110bfd8c27/320x320.jpg"},
-  {username: "elder", matchness: 9, follow: "Following", iconLink: "https://resources.tidal.com/images/e5685e43/c607/4a8a/8bec/86a9dd5648ad/320x320.jpg"}
+  const users = [
+  {username: "lisa", matchness: 29, follow: "followed", iconLink: "https://resources.tidal.com/images/0c3de7f6/d0a6/4d51/8344/1f110bfd8c27/320x320.jpg"},
+  {username: "jesuscrhistthethird", matchness: 81, follow: "unfollowed", iconLink: "https://resources.tidal.com/images/86799671/a18c/4a8b/935a/3f7e1ac97f39/640x640.jpg"},
+  {username: "The Scream", matchness: 86, follow: "followed", iconLink: "https://resources.tidal.com/images/2fa97549/1898/494f/a4bc/0e09d0a25a6e/640x640.jpg"},
+  {username: "elder", matchness: 9, follow: "followed", iconLink: "https://resources.tidal.com/images/e5685e43/c607/4a8a/8bec/86a9dd5648ad/320x320.jpg"},
+  {username: "amazingella", matchness: 92, follow: "unfollowed", iconLink: "https://resources.tidal.com/images/6b95de51/316d/4c53/9f10/5261a9e3bac0/640x640.jpg"},
+  {username: "fred", matchness: 74, follow: "unfollowed", iconLink: "https://resources.tidal.com/images/6cdffdfa/3819/4fcb/b961/56da72a7f3db/640x640.jpg"},
+  {username: "selectperson", matchness: 52, follow: "unfollowed", iconLink: "https://resources.tidal.com/images/96b5aae4/33ff/4ff7/9d84/fe3a6f17137b/640x640.jpg"},
+  {username: "trashcan", matchness: 46, follow: "unfollowed", iconLink: "https://resources.tidal.com/images/c6448675/7103/45f3/a1d2/6085f3b5f59e/640x640.jpg"},
+  {username: "sasha hathurusingha", matchness: 96, follow: "followed", iconLink: "https://resources.tidal.com/images/0843b27b/4466/4c7f/bfd6/4df4507cdf2a/640x640.jpg"},
+  {username: "Luciferan Towers", matchness: 34, follow: "unfollowed", iconLink: "https://resources.tidal.com/images/17024b49/483a/418f/af81/b5bc8cbb5469/320x320.jpg"},
+  {username: "GG.Nguyen", matchness: 64, follow: "followed", iconLink: "https://resources.tidal.com/images/2398c977/48e5/44da/97c2/25da8c9c1869/640x640.jpg"}
 ]
 
 function App() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredUsers, setFilteredUsers] = useState(users);
+  const [followedUsers, setFollowedUsers] = useState([]);
+
+  useEffect(() => {
+    const filtered = users.filter(u => u.username.toLowerCase().includes(searchQuery.toLowerCase()));
+    filtered.sort((a, b) => b.matchness - a.matchness);
+    setFilteredUsers(filtered);
+  }, [searchQuery]);
+
+  useEffect(() => {
+    followedUsers.map(u => {
+      
+    })
+  }, [followedUsers])
+
   function spiritIcon() {
     return (
       <figure class="spirit-icon">
@@ -38,7 +54,7 @@ function App() {
               <circle cx="21.5" cy="21.5" r="20" fill="#EEEFF4" stroke="#474A57" stroke-width="2"/>
           </svg>  
           <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
-              <path d="M20.6663 21.6875C20.6663 18.8685 17.01 16.5833 12.4997 16.5833C7.98935 16.5833 4.33301 18.8685 4.33301 21.6875M12.4997 13.5208C9.68072 13.5208 7.39551 11.2356 7.39551 8.41667C7.39551 5.59771 9.68072 3.3125 12.4997 3.3125C15.3186 3.3125 17.6038 5.59771 17.6038 8.41667C17.6038 11.2356 15.3186 13.5208 12.4997 13.5208Z" stroke="#474A57" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M20.6663 21.6875C20.6663 18.8685 17.01 16.5833 12.4997 16.5833C7.98935 16.5833 4.33301 18.8685 4.33301 21.6875M12.4 13.5208C9.68072 13.5208 7.39551 11.2356 7.39551 8.41667C7.39551 5.59771 9.68072 3.3125 12.4997 3.3125C15.3186 3.3125 17.6038 5.59771 17.6038 8.41667C17.6038 11.2356 15.3186 13.5208 12.4997 13.5208Z" stroke="#474A57" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
       </figure>
     )
@@ -92,24 +108,28 @@ function App() {
       </figure>
     )
   }
-  function searchFieldContent() {
-    return( 
-      <div class="search-field">
-        <h1>Search</h1>
-        <div class="search-bar">
-            <h2>Search based on your preferences...</h2>
-            <div class="magnifying-glass">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="#18191F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M20.9999 21L16.6499 16.65" stroke="#18191F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>                        
-            </div>
-        </div>
-        <div class="recommended"><h2>Recommended:</h2></div>  
+  function magnifyingGlassIcon() {
+    return (
+      <div class="magnifying-glass">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="#18191F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M20.9999 21L16.6499 16.65" stroke="#18191F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>                        
       </div>
     )
   }
-
+  function searchFieldContent() {
+    return ( 
+      <div class="search-field">
+        <h1>Search</h1>
+        <div class="search-bar">
+            <input type="text" placeholder="Search based on your preferences..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}></input>
+            {magnifyingGlassIcon()}
+        </div>
+        <div class="recommended"><h2>Recommended:</h2></div>  
+      </div> 
+    )
+  }
   function navbarButton(props) {
     return ( 
       <button>
@@ -118,8 +138,20 @@ function App() {
       </button>
     )
   }
+  function followUser({user}) {
+    setFollowedUsers(prevUsers => {
+      const updatedUser = { ...user, follow: "followed" };
+      return [...prevUsers, updatedUser];
+    });
+  }
 
   function user(props) {
+    const isFollowed = followedUsers.some(u => u.username === props.username);
+
+    const callFollowUser = () => {
+      followUser(props.u)
+    }
+
     return (
       <div class="user">
         <img class="user-icon" src={props.iconLink} alt="User Icon"/>
@@ -127,7 +159,9 @@ function App() {
             <h3>{props.username}</h3>
             <h4 id="plus-80-match">{props.matchness}% match</h4>
         </div>
-        <button class="follow-button" id="followed-user">{props.follow}</button>
+        <button class="follow-button" id={isFollowed ? "followed" : "unfollowed"} onClick={callFollowUser}>
+          {isFollowed ? "Following" : "Follow"}
+        </button>
       </div>
     )
   }
@@ -144,7 +178,7 @@ function App() {
         <section className='search-container'>
           {searchFieldContent()}
           <div class="users-field">
-            {profiles.map(u => user({username: u.username, matchness: u.matchness, follow: u.follow, iconLink : u.iconLink}))}
+            {filteredUsers.map(u => user({u: u, username: u.username, matchness: u.matchness, follow: u.follow, iconLink : u.iconLink}))}
           </div>
         </section>
         <footer>
