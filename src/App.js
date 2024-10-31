@@ -197,7 +197,7 @@ function App() {
   }
 
   return (
-    <body>
+    <div className="main-body">
       <section className='desktop-section'>
         <nav-bar>
           {spiritIcon()}
@@ -215,7 +215,7 @@ function App() {
           <h5>Spirit</h5>
         </footer>
       </section>
-    </body>
+    </div>
   ); 
 }
 

@@ -22,7 +22,7 @@
         display: none;
     }
 
-    body {
+    .main-body {
         margin: 0;
         background-color: var(--main-yellow);
         display: flex;
