@@ -151,7 +151,7 @@ function App() {
             <input type="text" placeholder="Search based on your preferences..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}></input>
             {magnifyingGlassIcon()}
         </div>
-        <div class="recommended"><h2>Recommended:</h2></div>  
+        <div class="recommended" id={searchQuery === "" ? "" : "hidden"}><h2>Recommended:</h2></div>  
       </div> 
     )
   }

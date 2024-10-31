@@ -18,6 +18,9 @@
         --main-blue: #1947E5;
     }
 
+    #hidden {
+        display: none;
+    }
 
     body {
         margin: 0;
@@ -271,9 +274,9 @@
         background: rgb(239, 239, 239);
     }
 
-        .search-container .users-field .user:hover {
-            cursor: pointer;
-        }
+    .search-container .users-field .user:hover {
+        cursor: pointer;
+    }
 
     .search-container .users-field .user .user-icon {
         width: 185px;
@@ -348,7 +351,6 @@
         color: var(--main-white);
     }
 
-
     footer {
         display: flex;
         justify-content: center; 
@@ -367,9 +369,5 @@
         font-family: "Mrs Sheppards";
         font-size: 25px;
         font-weight: 400; 
-    }
-
-    .mobile-section {
-        display: none;
     }
 }
