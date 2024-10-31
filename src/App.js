@@ -38,7 +38,7 @@ function App() {
   
   function spiritIcon() {
     return (
-      <figure class="spirit-icon">
+      <figure className="spirit-icon">
         <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 70 70" fill="none">
             <circle cx="35.5" cy="35.5" r="35.5" fill="#FFBD12"/>
         </svg>
@@ -53,7 +53,7 @@ function App() {
   }
   function profileIcon() {
     return( 
-      <figure class="nav-icon">
+      <figure className="nav-icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="43" height="43" viewBox="0 0 43 43" fill="none">
               <circle cx="21.5" cy="21.5" r="20" fill="#EEEFF4" stroke="#474A57" stroke-width="2"/>
           </svg>  
@@ -65,7 +65,7 @@ function App() {
   }
   function searchIcon() {
     return (
-      <figure class="nav-icon">
+      <figure className="nav-icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="43" height="43" viewBox="0 0 43 43" fill="none">
               <g clip-path="url(#clip0_127_460)">
               <rect x="1.5" y="1.5" width="39" height="40" rx="7" fill="#FFBD12" stroke="#18191F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -84,7 +84,7 @@ function App() {
   }
   function messageIcon() {
     return (
-      <figure class="nav-icon">
+      <figure className="nav-icon">
         <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44" fill="none">
             <g clip-path="url(#clip0_127_470)">
             <circle cx="21" cy="21.8462" r="20" fill="#EEEFF4" stroke="#18191F" stroke-width="2"/>
@@ -129,7 +129,7 @@ function App() {
   }
   function magnifyingGlassIcon() {
     return (
-      <div class="magnifying-glass">
+      <div className="magnifying-glass">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="#18191F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M20.9999 21L16.6499 16.65" stroke="#18191F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -144,14 +144,14 @@ function App() {
   
   function searchFieldContent() {
     return ( 
-      <div class="search-field">
+      <div className="search-field">
         <h1>Search</h1>
-        <div class="search-bar">
-            <button class="sort-icon" onClick={changeSort}>{sortStyle === "Descending" ? sortDescendingIcon() : sortAscendingIcon()}</button>
+        <div className="search-bar">
+            <button className="sort-icon" onClick={changeSort}>{sortStyle === "Descending" ? sortDescendingIcon() : sortAscendingIcon()}</button>
             <input type="text" placeholder="Search based on your preferences..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}></input>
             {magnifyingGlassIcon()}
         </div>
-        <div class="recommended" id={searchQuery === "" ? "" : "hidden"}><h2>Recommended:</h2></div>  
+        <div className="recommended" id={searchQuery === "" ? "" : "hidden"}><h2>Recommended:</h2></div>  
       </div> 
     )
   }
@@ -185,11 +185,11 @@ function App() {
     return (
       <div className="user" id={isFollowed ? "followedUser" : ""}>
         <img className="user-icon" src={props.iconLink} alt="User Icon"/>
-        <div class="user-info">
+        <div className="user-info">
             <h3>{props.username}</h3>
             <h4 id={matchness}>{props.matchness}% match</h4>
         </div>
-        <button class="follow-button" id={isFollowed ? "followed" : "unfollowed"} onClick={changeFollow}>
+        <button className="follow-button" id={isFollowed ? "followed" : "unfollowed"} onClick={changeFollow}>
           {isFollowed ? "Following" : "Follow"}
         </button>
       </div>
@@ -207,7 +207,7 @@ function App() {
         </nav-bar>
         <section className='search-container'>
           {searchFieldContent()}
-          <div class="users-field">
+          <div className="users-field">
             {filteredUsers.map(u => user({u: u, username: u.username, matchness: u.matchness, iconLink : u.iconLink}))}
           </div>
         </section>
