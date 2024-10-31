@@ -1,38 +1,373 @@
-.App {
-  text-align: center;
-}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mrs+Sheppards&display=swap');
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+@media (min-width: 601px) {
+    * {
+        font-family: Montserrat;
+    }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+    :root {
+        --main-yellow: #FFBD12;
+        --main-red: #F95A2C;
+        --80plus-green: #00C6AE;
+        --40plus-yellow: #eeb114;
+        --40minus-gray: #969BAB;
+        --main-white: #fff;
+        --main-black: #000000;
+        --main-grey: #474A57;
+        --main-blue: #1947E5;
+    }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+    #hidden {
+        display: none;
+    }
 
-.App-link {
-  color: #61dafb;
-}
+    .main-body {
+        margin: 0;
+        background-color: var(--main-yellow);
+        display: flex;
+        flex-direction: row;
+        overflow-x: hidden;
+    }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    .desktop-section {
+        background-color: var(--main-yellow);
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 100%;
+        min-width: 100vw; 
+    }
+
+    nav-bar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 180px;
+        height: 380px;
+        align-items: center;
+        flex-shrink: 0;
+        border-radius: 0px 0px 30px 0px;
+        border: 1px solid #000;
+        background: var(--main-white);
+        box-shadow: 0px 1px 0px 0px #18191F inset;
+        position: relative;
+    }
+
+    nav-bar .spirit-icon {
+        display: flex;
+        flex-direction: column;
+        width: 75px;
+        height: 75px;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+        position: relative;  
+    }
+
+    nav-bar .spirit-icon svg {
+        position: absolute; 
+        margin: 0; 
+    }   
+
+    nav-bar button {
+        width: 100%;
+        height: 80px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: left;
+        background-color: var(--main-white);
+        border: none;
+        gap: 10px;
+        padding-left: 15px;
+    }
+
+    nav-bar button:hover {
+        cursor: pointer;
+        background-color: rgb(221, 221, 221);
+        border: 1px solid rgb(186, 186, 186);
+    }
+
+    nav-bar .nav-icon {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;    
+        position: relative; 
+        width: 42px;
+        height: 42px;
+        margin: 0;
+    }
+
+    nav-bar .nav-icon svg:nth-child(2) {
+        position: absolute;
+        /* left: 6px; */
+        width: 25px;
+        height: 25px;
+    }
+
+    nav-bar .nav-icon svg:nth-child(3) {
+        position: absolute;
+        left: 22px;
+        bottom: 30px;
+        width: 25px;
+        height: 25px;
+    }
+
+    nav-bar p {
+        margin: 0;
+        color: var(--main-grey);    
+        color: var(--Colors-Black-800, #474A57);
+        text-align: center;
+        font-feature-settings: 'liga' off, 'clig' off;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 20px; 
+    }
+
+    nav-bar #selected {
+        color: black;
+    }
+
+    .search-container {
+        margin-bottom: 300px;
+        flex: 1 1 auto;  
+    }
+
+    .search-container .search-field {
+        margin: 0 50px 0 50px;
+        height: 280px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .search-container .search-field h1 {
+        font-size: 36px;
+    }
+
+    .search-container .search-field .search-bar {
+        width: 100%;    
+        height: 56px;
+        flex-shrink: 0;
+        margin: 0;
+        background-color: green;
+        border-radius: 16px;
+        border: 2px solid var(--main-black);
+        background: var(--main-white);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        box-shadow: 0px 4px 0px 0px #18191F;  
+        min-width: 220px;     
+    }
+
+    .search-container .search-field .search-bar:hover {
+        background-color: rgb(218, 218, 218);
+    }
+
+    .search-container .search-field .search-bar h2 {
+        margin: 2px 0 0 16px;
+        color: var(--Colors-Black, #18191F);
+        font-feature-settings: 'liga' off, 'clig' off;
+        font-size: 17px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 18px; 
+    }
+
+    .search-container .search-field .search-bar .magnifying-glass {
+        margin: 0 16px 0 auto;
+        display: flex;
+    }
+
+    .search-container .search-field .search-bar input {
+        margin: 2px 0 0 0;
+        width: 100%;
+        height: 94%;
+        border-radius: 80px;
+        color: var(--main-black);
+        font-feature-settings: 'liga' off, 'clig' off;
+        font-size: 17px;
+        font-style: normal;
+        font-weight: 900;
+        line-height: 18px; 
+        outline: none;
+        border: none;
+    }
+
+    .search-container .search-field .search-bar input::placeholder {
+        font-weight: 500;
+    }    
+
+    .search-container .search-field .search-bar:hover input,
+    .search-container .search-field .search-bar:hover .sort-icon {
+        background-color: rgb(218, 218, 218);
+    }
+
+    .search-container .search-field .search-bar .sort-icon {
+        border: none;
+        cursor: pointer;
+        margin: 6px 6px 0 12px;
+        background-color: white;
+        border-radius: 6px;
+    }
+
+    .search-container .search-field .search-bar .sort-icon:hover {
+        background-color: var(--main-white);
+        background-color: rgb(180, 180, 180);
+        transition: .2s ease-in-out;
+    }
+
+    .search-container .recommended {
+        width: 30%;
+        padding: 5px 0 5px 0;
+        background-color: var(--main-white);
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 20px;
+        border: 2px solid var(--main-black);  
+        font-size: 13px;
+        margin-top: 20px;
+        overflow: hidden;
+        font-feature-settings: 'liga' off, 'clig' off;
+        font-family: Montserrat;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 900;
+        line-height: 20px;   
+        min-width: 160px; 
+    }
+
+    .search-container .users-field {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        justify-content: left; 
+        margin: 0 50px 0 50px;
+        width: 100%;
+        flex: 1 1 auto;
+    }
+
+    .search-container .users-field .user {
+        width: 212px;
+        height: 328px;
+        flex-shrink: 0;
+        border-radius: 30px;
+        border: 2px solid var(--main-black);
+        background-color: var(--main-white);
+        overflow: hidden;
+        position: relative;
+    }
+
+    #followedUser {
+        background-color: var(--main-grey);
+        color: var(--main-white);
+    }
+
+    .search-container .users-field .user:hover {
+        background: rgb(239, 239, 239);
+    }
+
+    .search-container .users-field .user:hover {
+        cursor: pointer;
+    }
+
+    .search-container .users-field .user .user-icon {
+        width: 185px;
+        height: 185px;
+        flex-shrink: 0;
+        border-radius: 95px;
+        border: 2px solid var(--Colors-Black, #18191F);
+        margin: 10px 0 0 12px;
+    }
+
+    .search-container .users-field .user .user-info {
+        margin: 0 12px 0 12px;
+    }
+
+    .search-container .users-field .user .user-info h3, 
+    .search-container .users-field .user .user-info h4 {
+        padding: 0;
+        margin: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .search-container .users-field .user .user-info #plus-80-match {
+        color: var(--80plus-green);
+    }
+
+    .search-container .users-field .user .user-info #plus-40-match {
+        color: var(--40plus-yellow);
+    }
+
+    .search-container .users-field .user .user-info #minus-40-match {
+        color: var(--40minus-gray);
+    } 
+
+    .search-container .users-field .user .follow-button {
+        width: 212px;
+        height: 75px;
+        flex-shrink: 0;
+        border: none;
+        border-top: 2px solid var(--main-black);
+        stroke-width: 2px;
+        stroke: var(--main-black);
+        margin: 0 0 0 0;
+        position: absolute;
+        bottom: 0;  
+        font-feature-settings: 'liga' off, 'clig' off;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 800;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    .search-container .users-field .user #unfollowed {
+        background-color: var(--main-blue);
+        color: var(--main-black);
+    }
+
+    .search-container .users-field .user #unfollowed:hover {
+        background-color: #3962e6;
+        ;
+    }
+
+    .search-container .users-field .user #followed {
+        background-color: var(--main-black);
+        color: var(--main-white);
+    }
+
+    .search-container .users-field .user #followed:hover {
+        background-color: rgb(43, 43, 43);
+        color: var(--main-white);
+    }
+
+    footer {
+        display: flex;
+        justify-content: center; 
+        align-items: center;
+        width: 100vw; 
+        height: 50px; 
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        background-color: var(--main-black);
+    }
+
+    footer h5 {
+        color: var(--Main-Yellow, #FFBD12);
+        font-feature-settings: 'liga' off, 'clig' off;
+        font-family: "Mrs Sheppards";
+        font-size: 25px;
+        font-weight: 400; 
+    }
 }
