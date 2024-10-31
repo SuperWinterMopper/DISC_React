@@ -182,7 +182,7 @@
     }
 
     .search-container .search-field .search-bar input {
-        margin: 2px 0 0 16px;
+        margin: 2px 0 0 0;
         width: 100%;
         height: 94%;
         border-radius: 80px;
@@ -200,8 +200,23 @@
         font-weight: 500;
     }    
 
-    .search-container .search-field .search-bar:hover input {
+    .search-container .search-field .search-bar:hover input,
+    .search-container .search-field .search-bar:hover .sort-icon {
         background-color: rgb(218, 218, 218);
+    }
+
+    .search-container .search-field .search-bar .sort-icon {
+        border: none;
+        cursor: pointer;
+        margin: 6px 6px 0 12px;
+        background-color: white;
+        border-radius: 6px;
+    }
+
+    .search-container .search-field .search-bar .sort-icon:hover {
+        background-color: var(--main-white);
+        background-color: rgb(180, 180, 180);
+        transition: .2s ease-in-out;
     }
 
     .search-container .recommended {
