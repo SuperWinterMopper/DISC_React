@@ -247,6 +247,15 @@
         position: relative;
     }
 
+    #followedUser {
+        background-color: var(--main-grey);
+        color: var(--main-white);
+    }
+
+    .search-container .users-field .user:hover {
+        background: rgb(239, 239, 239);
+    }
+
         .search-container .users-field .user:hover {
             cursor: pointer;
         }

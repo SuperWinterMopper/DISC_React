@@ -142,7 +142,7 @@ function App() {
     const isFollowed = followedUsers.some(u => u.username === props.username);
     let matchness = "minus-40-match"
     if(props.matchness >= 80) matchness = "plus-80-match";
-    else if (props.matchness >= 40) matchness = "plus-40-match";
+    else if(props.matchness >= 40) matchness = "plus-40-match";
 
     const changeFollow = () => {
       if(followedUsers.some(u => u.username === props.username)) 
@@ -157,8 +157,8 @@ function App() {
     }
 
     return (
-      <div class="user">
-        <img class="user-icon" src={props.iconLink} alt="User Icon"/>
+      <div className="user" id={isFollowed ? "followedUser" : ""}>
+        <img className="user-icon" src={props.iconLink} alt="User Icon"/>
         <div class="user-info">
             <h3>{props.username}</h3>
             <h4 id={matchness}>{props.matchness}% match</h4>
