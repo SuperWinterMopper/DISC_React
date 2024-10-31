@@ -27,21 +27,15 @@ function App() {
   const [sortStyle, setSortStyle] = useState("Descending")
 
   useEffect(() => {
-    const filtered = users.filter(u => u.username.toLowerCase().includes(searchQuery.toLowerCase()));
-    filtered.sort((a, b) => b.matchness - a.matchness);
-    setFilteredUsers(filtered);
-  }, [searchQuery]);
-
-  useEffect(() => {
-    const sortedUsers = users.filter(u => u.username.toLowerCase().includes(searchQuery.toLowerCase()));
-    if(sortStyle === "Descending") 
-      sortedUsers.sort((a, b) => b.matchness - a.matchness);
-    else {
-      sortedUsers.sort((a, b) => a.matchness - b.matchness);
+    let filtered = users.filter(u => u.username.toLowerCase().includes(searchQuery.toLowerCase()));
+    if(sortStyle === "Descending") {
+      filtered.sort((a, b) => b.matchness - a.matchness);
+    } else {
+      filtered.sort((a, b) => a.matchness - b.matchness);
     }
-    setFilteredUsers(sortedUsers);
-  }, [sortStyle]);
-
+    setFilteredUsers(filtered);
+  }, [searchQuery, sortStyle]); 
+  
   function spiritIcon() {
     return (
       <figure class="spirit-icon">
@@ -121,14 +115,17 @@ function App() {
   function sortAscendingIcon() {
     return (
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <path d="M4 17H10M4 12H13M18 11V19M18 19L21 16M18 19L15 16M4 7H16" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M4 17H16M4 12H13M4 7H10M18 13V5M18 5L21 8M18 5L15 8" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     )
   }
   function sortDescendingIcon() {
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-      <path d="M4 17H16M4 12H13M4 7H10M18 13V5M18 5L21 8M18 5L15 8" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    return (
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M4 17H10M4 12H13M18 11V19M18 19L21 16M18 19L15 16M4 7H16" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
+
+    )
   }
   function magnifyingGlassIcon() {
     return (
@@ -141,12 +138,8 @@ function App() {
     )
   }
   function changeSort() {
-    if(sortStyle === "Descending") {
-      setSortStyle("Ascending");
-    }
-    else {
-      setSortStyle("Descending");
-    }
+    if(sortStyle === "Descending") setSortStyle("Ascending");
+    else setSortStyle("Descending");
   }
   
   function searchFieldContent() {
@@ -154,7 +147,7 @@ function App() {
       <div class="search-field">
         <h1>Search</h1>
         <div class="search-bar">
-            <button class="sort-icon" onClick={changeSort()}>{sortStyle === "Descending" ? sortDescendingIcon() : sortAscendingIcon()}</button>
+            <button class="sort-icon" onClick={changeSort}>{sortStyle === "Descending" ? sortDescendingIcon() : sortAscendingIcon()}</button>
             <input type="text" placeholder="Search based on your preferences..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}></input>
             {magnifyingGlassIcon()}
         </div>
