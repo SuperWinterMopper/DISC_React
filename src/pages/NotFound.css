@@ -1,0 +1,27 @@
+:root {
+    --main-yellow: #FFBD12;
+    --main-red: #F95A2C;
+    --80plus-green: #00C6AE;
+    --40plus-yellow: #eeb114;
+    --40minus-gray: #969BAB;
+    --main-white: #fff;
+    --main-black: #000000;
+    --main-grey: #474A57;
+    --main-blue: #1947E5;
+}
+
+.not-found {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    font-size: 30px;
+    background-color: var(--80plus-green);
+}
+
+.not-found .react-link {
+    color: var(--main-white);
+}

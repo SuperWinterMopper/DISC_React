@@ -1,5 +1,6 @@
 import './App.css';
 import React, { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 
   const users = [
   {username: "lisa", matchness: 29, iconLink: "https://resources.tidal.com/images/0c3de7f6/d0a6/4d51/8344/1f110bfd8c27/320x320.jpg"},
@@ -157,10 +158,12 @@ function App() {
   }
   function navbarButton(props) {
     return ( 
-      <button>
-        {props.icon}
-        <p id={props.text === currentPage ? "selected" : ""}>{props.text}</p>
-      </button>
+      <Link to={props.to} className='nav-bar-link'>
+        <button>
+          {props.icon}
+          <p id={props.text === currentPage ? "selected" : ""}>{props.text}</p>
+        </button>
+      </Link>
     )
   }
 
@@ -201,12 +204,12 @@ function App() {
       <section className='desktop-section'>
         <nav-bar>
           {spiritIcon()}
-          {navbarButton({ text: "Profile", icon : profileIcon()})}
-          {navbarButton({ text: "Search", icon : searchIcon()})}
-          {navbarButton({ text: "Message", icon : messageIcon()})}
+          {navbarButton({ text: "Search", icon : searchIcon(), to : "/"})}
+          {navbarButton({ text: "Profile", icon : profileIcon(), to : "/Profile"})}
+          {navbarButton({ text: "Message", icon : messageIcon(), to : "/Message"})}
         </nav-bar>
         <section className='search-container'>
-          {searchFieldContent()}
+          {searchFieldContent()}  
           <div className="users-field">
             {filteredUsers.map(u => user({u: u, username: u.username, matchness: u.matchness, iconLink : u.iconLink}))}
           </div>
