@@ -6,17 +6,13 @@ import ProfileIcon from '../assets/ProfileIcon';
 import SearchIcon from '../assets/SearchIcon';
 import MessageIcon from '../assets/MessageIcon';
 import MagnifyingGlassIcon from '../assets/MagnifyingGlassIcon';
-import SortAscendingIcon from '../assets/SortAscendingIcon';
-import SortDescendingIcon from '../assets/SortDescendingIcon';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState("Search");
+  const [currentPage, setCurrentPage] = useState("Message");
   const [searchQuery, setSearchQuery] = useState("");
   const [allUsers, setAllUsers] = useState([]);
-  const [usersDisplayData, setUsersDisplayData] = useState([]);
+  const [messageData, setMessageData] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
-  const [followedUsers, setFollowedUsers] = useState([]);
-  const [sortStyle, setSortStyle] = useState("Descending");
 
   useEffect(() => {
     async function fetchAllUsers() {
@@ -27,12 +23,14 @@ function App() {
         const processedData = userData.map(user => ({
           key: user.id,
           username: user.firstName + " " + user.lastName,
-          //for the moment, matchness is randomly assigned. Once I have my own database, it will be fixed
-          matchness: Math.floor(Math.random() * 101),  
           iconLink: user.profilePicture,
+          //for the moment, these are constant, but with own database can easily fill with real data
+          message: "why did you leave all your trash in my room",
+          time: "19h ago",
+          messageNum: 2,  
         }));
 
-        setUsersDisplayData(processedData);
+        setMessageData(processedData);
       } catch (error) {
         console.log(error.message);
       }
@@ -41,33 +39,18 @@ function App() {
   }, [])
 
   useEffect(() => {
-    let filtered = usersDisplayData.filter(user => user.username.toLowerCase().includes(searchQuery.toLowerCase()));
-    console.log("HI THIS USEEFFECT IS RUN")
-    if(sortStyle === "Descending") {
-      filtered.sort((a, b) => b.matchness - a.matchness);
-      console.log("descending is  RUN")
-    } else {
-      filtered.sort((a, b) => a.matchness - b.matchness);
-      console.log("ASCENING  is  RUN")
-    }
+    let filtered = messageData.filter(user => user.username.toLowerCase().includes(searchQuery.toLowerCase()));
     setFilteredUsers(filtered);
-  }, [usersDisplayData, searchQuery, sortStyle]); 
-    
-  function changeSort() {
-    if(sortStyle === "Descending") setSortStyle("Ascending");
-    else setSortStyle("Descending");
-  }
-  
+  }, [messageData, searchQuery]); 
+
   function searchFieldContent() {
     return ( 
       <div className="search-field">
         <h1>Search</h1>
         <div className="search-bar">
-            <button className="sort-icon" onClick={changeSort}>{sortStyle === "Descending" ? <SortDescendingIcon /> : <SortAscendingIcon/>}</button>
-            <input type="text" placeholder="Search based on your preferences..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}></input>
+            <input type="text" placeholder="Search messages..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} style={{marginLeft: '52px'}}></input>
             {<MagnifyingGlassIcon />}
         </div>
-        <div className="recommended" id={searchQuery === "" ? "" : "hidden"}><h2>Recommended:</h2></div>  
       </div> 
     )
   }
@@ -87,15 +70,15 @@ function App() {
     return (
       <button className="messageBox">
         <div className="userIcon">
-          {/* <img src={props.iconLink} alt="User Icon"/> */}
+          <img src={props.iconLink} alt="User Icon"/>
         </div>
         <div className="usernameMessage">
           <p className="username">{props.username}</p>
           <p className="message">{props.message}</p>
         </div>
         <div className="timeNotifications">
-          <p className='time'>3:54am</p>
-          <div className='notification'>2</div>
+          <p className='time'>{props.time}</p>
+          <div className='notification'>{props.messageNum}</div>
         </div>
       </button>
     )
@@ -103,7 +86,7 @@ function App() {
 
   return (
     <div className="main-body">
-      <section className='desktop-section'>
+      <section className='desktopSectionMessage'>
         <nav-bar>
           <SpiritIcon />
           {navbarButton({ text: "Search", icon : <SearchIcon />, to : "/"})}
@@ -114,7 +97,7 @@ function App() {
         <section className='search-container'>
           {searchFieldContent()}  
           <div className="messagesField">
-            {message({username: "Andy Edwards", message: "Stop by at my house"})}
+            {filteredUsers.map(user => message({username: user.username, message: user.message, time: user.time, messageNum: user.messageNum, iconLink: user.iconLink}))}
           </div>
         </section>
         <footer>

@@ -10,13 +10,26 @@
     --main-blue: #1947E5;
 }
 
+.desktopSectionMessage {
+    background-color: var(--main-blue);
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    min-width: 100vw; 
+    min-height: 100vh;
+}
+
 .messagesField {
     background-color: rgb(55, 82, 82);
     margin: 0 50px 0 50px;
 }
 
 .messagesField .messageBox {
-    border: 2px solid black;
+    border-right: 2px solid black;
+    border-left: 2px solid black;
+    border-top: none;
+    border-bottom: 2px solid black;
     width: 100%;
     height: 98px;
     display: flex;
@@ -26,17 +39,33 @@
     padding: 0;
 }
 
+.messagesField .messageBox:nth-child(1) {
+    border-top: 2px solid var(--main-black);
+}
+
+.messagesField .messageBox:hover {
+    background-color: rgb(207, 207, 207);
+}
+
 .messagesField .messageBox .userIcon {
     width: 48px;
     height: 48px;
-    background-color: red;
+    min-width: 48px;
+    min-height: 48px;
     object-fit: cover;
     border-radius: 50%;
     margin: 0 12px 0 24px;
+    overflow: hidden;
+    border: 2px solid var(--main-black);
+}
+
+.messagesField .messageBox .userIcon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  
 }
 
 .messagesField .messageBox .usernameMessage {
-    background-color: purple;
     height: 50px;
     display: flex;
     flex-direction: column;
@@ -44,19 +73,25 @@
     align-items: start;
     padding: 0;
     margin: 0;
-    width: 1080px;
+    width: 88%;
 }
 
 .messagesField .messageBox .usernameMessage .username {
     margin: 0;
+    font-size: 21px;
+    font-weight: 800;
+    line-height: 28px;
 }
 
 .messagesField .messageBox .usernameMessage .message {
     margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 20px;
+    color: var(--main-grey);
 }
 
 .messagesField .messageBox .timeNotifications {
-    background-color: orange;
     height: 50px;
     flex-direction: column;
     align-items: flex-end;
@@ -65,6 +100,10 @@
 
 .messagesField .messageBox .timeNotifications .time {
     margin: 0 0 18px 0;
+    color: var(--40minus-gray);
+    text-align: right;
+    font-size: 11px;
+    font-weight: 700;
 }
 
 .messagesField .messageBox .timeNotifications .notification {
@@ -76,4 +115,7 @@
     gap: 10px;
     border-radius: 30px;
     background-color: var(--main-red);
+    color: var(--main-white);
+    font-size: 12px;
+    font-weight: 700;
 }

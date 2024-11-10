@@ -42,13 +42,10 @@ function App() {
 
   useEffect(() => {
     let filtered = usersDisplayData.filter(user => user.username.toLowerCase().includes(searchQuery.toLowerCase()));
-    console.log("HI THIS USEEFFECT IS RUN")
     if(sortStyle === "Descending") {
       filtered.sort((a, b) => b.matchness - a.matchness);
-      console.log("descending is  RUN")
     } else {
       filtered.sort((a, b) => a.matchness - b.matchness);
-      console.log("ASCENING  is  RUN")
     }
     setFilteredUsers(filtered);
   }, [usersDisplayData, searchQuery, sortStyle]); 
