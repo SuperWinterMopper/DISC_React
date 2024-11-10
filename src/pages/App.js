@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState, useEffect, useInsertionEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import SpiritIcon from '../assets/SpiritIcon';
 import ProfileIcon from '../assets/ProfileIcon';

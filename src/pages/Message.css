@@ -1,0 +1,79 @@
+:root {
+    --main-yellow: #FFBD12;
+    --main-red: #F95A2C;
+    --80plus-green: #00C6AE;
+    --40plus-yellow: #eeb114;
+    --40minus-gray: #969BAB;
+    --main-white: #fff;
+    --main-black: #000000;
+    --main-grey: #474A57;
+    --main-blue: #1947E5;
+}
+
+.messagesField {
+    background-color: rgb(55, 82, 82);
+    margin: 0 50px 0 50px;
+}
+
+.messagesField .messageBox {
+    border: 2px solid black;
+    width: 100%;
+    height: 98px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    padding: 0;
+}
+
+.messagesField .messageBox .userIcon {
+    width: 48px;
+    height: 48px;
+    background-color: red;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 0 12px 0 24px;
+}
+
+.messagesField .messageBox .usernameMessage {
+    background-color: purple;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    padding: 0;
+    margin: 0;
+    width: 1080px;
+}
+
+.messagesField .messageBox .usernameMessage .username {
+    margin: 0;
+}
+
+.messagesField .messageBox .usernameMessage .message {
+    margin: 0;
+}
+
+.messagesField .messageBox .timeNotifications {
+    background-color: orange;
+    height: 50px;
+    flex-direction: column;
+    align-items: flex-end;
+    margin: 0 24px 0 0;
+}
+
+.messagesField .messageBox .timeNotifications .time {
+    margin: 0 0 18px 0;
+}
+
+.messagesField .messageBox .timeNotifications .notification {
+    display: flex;
+    width: 48px;
+    padding: 0 4px;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    border-radius: 30px;
+    background-color: var(--main-red);
+}
