@@ -27,7 +27,8 @@ function App() {
         const processedData = userData.map(user => ({
           key: user.id,
           username: user.firstName + " " + user.lastName,
-          matchness: Math.floor(Math.random() * 101),
+          //for the moment, matchness is randomly assigned. Once I have my own database, it will be fixed
+          matchness: Math.floor(Math.random() * 101),  
           iconLink: user.profilePicture,
         }));
 
@@ -41,10 +42,13 @@ function App() {
 
   useEffect(() => {
     let filtered = usersDisplayData.filter(user => user.username.toLowerCase().includes(searchQuery.toLowerCase()));
+    console.log("HI THIS USEEFFECT IS RUN")
     if(sortStyle === "Descending") {
       filtered.sort((a, b) => b.matchness - a.matchness);
+      console.log("descending is  RUN")
     } else {
       filtered.sort((a, b) => a.matchness - b.matchness);
+      console.log("ASCENING  is  RUN")
     }
     setFilteredUsers(filtered);
   }, [usersDisplayData, searchQuery, sortStyle]); 
@@ -99,7 +103,9 @@ function App() {
 
     return (
       <div className="user" id={isFollowed ? "followedUser" : ""}>
-        <img className="user-icon" src={props.iconLink} alt="User Icon"/>
+        <div className='user-icon'>
+          <img src={props.iconLink} alt="User Icon"/>
+        </div>
         <div className="user-info">
             <h3>{props.username}</h3>
             <h4 id={matchness}>{props.matchness}% match</h4>
@@ -123,7 +129,7 @@ function App() {
         <section className='search-container'>
           {searchFieldContent()}  
           <div className="users-field">
-            {usersDisplayData.map(user=> profile({username: user.username, matchness: user.matchness, iconLink : user.iconLink}))}
+            {filteredUsers.map(user=> profile({username: user.username, matchness: user.matchness, iconLink : user.iconLink}))}
           </div>
         </section>
         <footer>
