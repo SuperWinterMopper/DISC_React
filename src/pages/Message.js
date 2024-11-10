@@ -7,7 +7,7 @@ import SearchIcon from '../assets/SearchIcon';
 import MessageIcon from '../assets/MessageIconSelected';
 import MagnifyingGlassIcon from '../assets/MagnifyingGlassIcon';
 
-function App() {
+function Message() {
   const [currentPage, setCurrentPage] = useState("Message");
   const [searchQuery, setSearchQuery] = useState("");
   const [allUsers, setAllUsers] = useState([]);
@@ -108,4 +108,4 @@ function App() {
   ); 
 }
 
-export default App;
+export default Message;

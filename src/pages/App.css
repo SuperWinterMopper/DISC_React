@@ -24,7 +24,6 @@
 
     .main-body {
         margin: 0;
-        background-color: var(--main-yellow);
         display: flex;
         flex-direction: row;
         overflow-x: hidden;

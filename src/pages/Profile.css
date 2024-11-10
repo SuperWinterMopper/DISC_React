@@ -1,0 +1,26 @@
+:root {
+    --main-yellow: #FFBD12;
+    --main-red: #F95A2C;
+    --80plus-green: #00C6AE;
+    --40plus-yellow: #eeb114;
+    --40minus-gray: #969BAB;
+    --main-white: #fff;
+    --main-black: #000000;
+    --main-grey: #474A57;
+    --main-blue: #1947E5;
+}
+
+.desktopSectionProfile {
+    background-color: var(--main-white);
+    display: flex;
+    flex-direction: column;
+}
+
+.profileBanner {
+    width: 100vw;
+    height: 380px;
+    background-color: var(--main-blue);
+    border-radius: 0 0 52px 0;
+    border-right: 2px solid var(--main-black);
+    border-bottom: 2px solid var(--main-black);
+}
