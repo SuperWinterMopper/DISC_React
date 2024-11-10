@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import SpiritIcon from '../assets/SpiritIcon';
 import ProfileIcon from '../assets/ProfileIcon';
-import SearchIcon from '../assets/SearchIcon';
+import SearchIcon from '../assets/SearchIconSelected';
 import MessageIcon from '../assets/MessageIcon';
 import MagnifyingGlassIcon from '../assets/MagnifyingGlassIcon';
 import SortAscendingIcon from '../assets/SortAscendingIcon';

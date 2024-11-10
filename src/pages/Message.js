@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import SpiritIcon from '../assets/SpiritIcon';
 import ProfileIcon from '../assets/ProfileIcon';
 import SearchIcon from '../assets/SearchIcon';
-import MessageIcon from '../assets/MessageIcon';
+import MessageIcon from '../assets/MessageIconSelected';
 import MagnifyingGlassIcon from '../assets/MagnifyingGlassIcon';
 
 function App() {
@@ -24,8 +24,8 @@ function App() {
           key: user.id,
           username: user.firstName + " " + user.lastName,
           iconLink: user.profilePicture,
+          message: "Hi, I'm a " + user.bio,
           //for the moment, these are constant, but with own database can easily fill with real data
-          message: "why did you leave all your trash in my room",
           time: "19h ago",
           messageNum: 2,  
         }));
@@ -46,7 +46,7 @@ function App() {
   function searchFieldContent() {
     return ( 
       <div className="search-field">
-        <h1>Search</h1>
+        <h1>Message</h1>
         <div className="search-bar">
             <input type="text" placeholder="Search messages..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} style={{marginLeft: '52px'}}></input>
             {<MagnifyingGlassIcon />}

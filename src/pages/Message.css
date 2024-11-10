@@ -37,6 +37,7 @@
     align-items: center;
     cursor: pointer;
     padding: 0;
+    overflow: hidden;
 }
 
 .messagesField .messageBox:nth-child(1) {

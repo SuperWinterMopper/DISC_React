@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function MagnifyingGlassIcon() {
+export default function ProfileIcon() {
   return (
 		<figure className="nav-icon">
 			<svg xmlns="http://www.w3.org/2000/svg" width="43" height="43" viewBox="0 0 43 43" fill="none">
