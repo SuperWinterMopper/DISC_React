@@ -1,6 +1,13 @@
 import './App.css';
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
+import SpiritIcon from '../assets/SpiritIcon';
+import ProfileIcon from '../assets/ProfileIcon';
+import SearchIcon from '../assets/SearchIcon';
+import MessageIcon from '../assets/MessageIcon';
+import MagnifyingGlassIcon from '../assets/MagnifyingGlassIcon';
+import SortAscendingIcon from '../assets/SortAscendingIcon';
+import SortDescendingIcon from '../assets/SortDescendingIcon';
 
   const users = [
   {username: "lisa", matchness: 29, iconLink: "https://resources.tidal.com/images/0c3de7f6/d0a6/4d51/8344/1f110bfd8c27/320x320.jpg"},
@@ -36,108 +43,7 @@ function App() {
     }
     setFilteredUsers(filtered);
   }, [searchQuery, sortStyle]); 
-  
-  function spiritIcon() {
-    return (
-      <figure className="spirit-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 70 70" fill="none">
-            <circle cx="35.5" cy="35.5" r="35.5" fill="#FFBD12"/>
-        </svg>
-        <svg xmlns="http://www.w3.org/2000/svg" width="43" height="43" viewBox="0 0 43 43" fill="none">
-            <path d="M29.6609 0.199997H13.3395L0.200195 13.3393V29.6607L13.3395 42.8H29.6609L42.8002 29.6607V13.3393L29.6609 0.199997ZM15.5978 29.866L7.18045 21.4487L15.5978 13.0313C18.78 9.84915 24.0152 9.84915 27.1973 13.0313L35.6147 21.4487L27.1973 29.866C24.0152 33.0482 18.8826 33.0482 15.5978 29.866Z" fill="#201B21"/>
-        </svg>
-        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="17" viewBox="0 0 11 17" fill="none">
-            <path d="M0.943001 4.32875H0.766602V7.19834H4.23575C4.55915 7.19834 4.67675 7.64209 4.38275 7.79L3.70656 8.11542C2.79517 8.55917 1.88379 8.79583 0.943001 8.79583H0.766602V11.6654H4.14756C4.47095 11.6654 4.58855 12.1092 4.29455 12.2571L3.58897 12.5825C2.73638 12.9967 1.82499 13.2037 0.943001 13.2037H0.766602V16.0733H4.14756L4.52975 15.6C6.17613 13.6771 8.0871 12.6713 10.0863 12.6713H10.2333V9.80167H6.85231C6.52892 9.80167 6.41132 9.35791 6.70532 9.21L7.41091 8.88458C8.2635 8.47042 9.17489 8.26333 10.0569 8.26333H10.2039V5.39375H6.76412C6.44072 5.39375 6.32312 4.95 6.61712 4.80208L7.29331 4.47667C8.2047 4.03292 9.11609 3.79625 10.0569 3.79625H10.2039V0.926666H6.82292L6.44072 1.4C4.85314 3.32292 2.91277 4.32875 0.943001 4.32875Z" fill="#201B21"/>
-        </svg>                                    
-      </figure>
-    )
-  }
-  function profileIcon() {
-    return( 
-      <figure className="nav-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="43" height="43" viewBox="0 0 43 43" fill="none">
-              <circle cx="21.5" cy="21.5" r="20" fill="#EEEFF4" stroke="#474A57" stroke-width="2"/>
-          </svg>  
-          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
-              <path d="M20.6663 21.6875C20.6663 18.8685 17.01 16.5833 12.4997 16.5833C7.98935 16.5833 4.33301 18.8685 4.33301 21.6875M12.4 13.5208C9.68072 13.5208 7.39551 11.2356 7.39551 8.41667C7.39551 5.59771 9.68072 3.3125 12.4997 3.3125C15.3186 3.3125 17.6038 5.59771 17.6038 8.41667C17.6038 11.2356 15.3186 13.5208 12.4997 13.5208Z" stroke="#474A57" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-      </figure>
-    )
-  }
-  function searchIcon() {
-    return (
-      <figure className="nav-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="43" height="43" viewBox="0 0 43 43" fill="none">
-              <g clip-path="url(#clip0_127_460)">
-              <rect x="1.5" y="1.5" width="39" height="40" rx="7" fill="#FFBD12" stroke="#18191F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </g>
-              <defs>
-              <clipPath id="clip0_127_460">
-                  <rect width="42" height="42" fill="white" transform="translate(0.5 0.5)"/>
-              </clipPath>
-              </defs>
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
-              <path d="M13.25 13.75L19.375 19.875M8.14583 15.7917C4.1993 15.7917 1 12.5924 1 8.64583C1 4.6993 4.1993 1.5 8.14583 1.5C12.0924 1.5 15.2917 4.6993 15.2917 8.64583C15.2917 12.5924 12.0924 15.7917 8.14583 15.7917Z" stroke="#18191F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-      </figure>
-    )
-  }
-  function messageIcon() {
-    return (
-      <figure className="nav-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44" fill="none">
-            <g clip-path="url(#clip0_127_470)">
-            <circle cx="21" cy="21.8462" r="20" fill="#EEEFF4" stroke="#18191F" stroke-width="2"/>
-        </g>
-        <defs>
-            <clipPath id="clip0_127_470">
-                <rect width="43.5292" height="43.3846" fill="white" transform="translate(0 0.615402)"/>
-            </clipPath>
-        </defs>
-        </svg>
-        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14" fill="none">
-            <g clip-path="url(#clip0_106_34)">
-                <path d="M12.9157 6.99992H3.84115" stroke="#474A57" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M12.9158 7.00003L1.77891 12.3623L3.8413 7.00003L1.77891 1.6378L12.9158 7.00003Z" stroke="#474A57" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </g>
-                <defs>
-                <clipPath id="clip0_106_34">
-                    <rect width="14" height="14" fill="white" transform="translate(0.5)"/>
-                </clipPath>
-            </defs>
-        </svg>  
-        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14" fill="none">
-            <circle cx="7.5" cy="7" r="6" fill="#F95A2C" stroke="white" stroke-width="2"/>
-        </svg>    
-      </figure>
-    )
-  }
-  function sortAscendingIcon() {
-    return (
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <path d="M4 17H16M4 12H13M4 7H10M18 13V5M18 5L21 8M18 5L15 8" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    )
-  }
-  function sortDescendingIcon() {
-    return (
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-      <path d="M4 17H10M4 12H13M18 11V19M18 19L21 16M18 19L15 16M4 7H16" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-
-    )
-  }
-  function magnifyingGlassIcon() {
-    return (
-      <div className="magnifying-glass">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="#18191F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M20.9999 21L16.6499 16.65" stroke="#18191F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>                        
-      </div>
-    )
-  }
+    
   function changeSort() {
     if(sortStyle === "Descending") setSortStyle("Ascending");
     else setSortStyle("Descending");
@@ -148,14 +54,15 @@ function App() {
       <div className="search-field">
         <h1>Search</h1>
         <div className="search-bar">
-            <button className="sort-icon" onClick={changeSort}>{sortStyle === "Descending" ? sortDescendingIcon() : sortAscendingIcon()}</button>
+            <button className="sort-icon" onClick={changeSort}>{sortStyle === "Descending" ? <SortDescendingIcon /> : <SortAscendingIcon/>}</button>
             <input type="text" placeholder="Search based on your preferences..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}></input>
-            {magnifyingGlassIcon()}
+            {<MagnifyingGlassIcon />}
         </div>
         <div className="recommended" id={searchQuery === "" ? "" : "hidden"}><h2>Recommended:</h2></div>  
       </div> 
     )
   }
+  
   function navbarButton(props) {
     return ( 
       <Link to={props.to} className='nav-bar-link'>
@@ -203,10 +110,10 @@ function App() {
     <div className="main-body">
       <section className='desktop-section'>
         <nav-bar>
-          {spiritIcon()}
-          {navbarButton({ text: "Search", icon : searchIcon(), to : "/"})}
-          {navbarButton({ text: "Profile", icon : profileIcon(), to : "/Profile"})}
-          {navbarButton({ text: "Message", icon : messageIcon(), to : "/Message"})}
+          <SpiritIcon />
+          {navbarButton({ text: "Search", icon : <SearchIcon />, to : "/"})}
+          {navbarButton({ text: "Profile", icon : <ProfileIcon />, to : "/Profile"})}
+          {navbarButton({ text: "Message", icon : <MessageIcon />, to : "/Message"})}
         </nav-bar>
         <section className='search-container'>
           {searchFieldContent()}  

@@ -7,7 +7,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './pages/App';
 import Profile from './pages/Profile';
 import NotFound from './pages/NotFound'
-import Message from './pages/Message'
+import Message from './pages/Message';
+import Test from './pages/Test';
 
 const router = createBrowserRouter([
   {
@@ -20,8 +21,16 @@ const router = createBrowserRouter([
     element: <Profile />,
   },
   {
+    path: '/profile/:profileID',
+    element: <Profile />,
+  },
+  {
     path: '/message',
     element: <Message />,
+  },
+  {
+    path: '/test',
+    element: <Test />,
   },
 ]); 
 
