@@ -13,22 +13,6 @@ const genres = ["Vaporwave", "Chillwave", "Dungeon Synth", "Synthwave", "Darkwav
 
   export default function Profile() {
   const [currentPage, setCurrentPage] = useState("Profile");
-  const [userData, setUserData] = useState(null);
-  const profileName = useParams();
-
-  useEffect(() => {
-    async function fetchUserData() {
-      try {
-        const response = await fetch("https://disc-assignment-5-users-api.onrender.com/api/users");
-        const data = await response.json();
-        const this_user = data.filter(user => (user.firstName + " " + user.lastName) === profileName.profileID)[0];
-        setUserData(this_user);
-      } catch (error) {
-        console.log(error.message);
-      }
-    }
-    fetchUserData();
-  }, [profileName]) 
 
   function navbarButton(props) {
     return ( 
@@ -54,17 +38,17 @@ const genres = ["Vaporwave", "Chillwave", "Dungeon Synth", "Synthwave", "Darkwav
     return (    
       <div className='profileInfoContainer'>
         <div className='profilePicture'>
-          <img src={props.user.profilePicture} alt="User Icon"/>
+          <img src='https://resources.tidal.com/images/2eaf0497/bcbd/45d5/bf9b/4e83e23b53b0/640x640.jpg' alt="User Icon"/>
         </div>
         <div className='textInfo'>
-          <h1>{props.user.firstName + " "+ props.user.lastName}</h1>
-          <h2>{props.user.email}</h2>
+          <h1>Acton Healy</h1>
+          <h2>@myemail123456789@gmail.com</h2>
           <div className='statisticsField'>
             {statistic({num: 40, type: "Tags"})}
             {statistic({num: 28, type: "Following"})}
             {statistic({num: 23, type: "Followers"})}
           </div>
-          <p>{props.user.bio}</p>
+          <p>Hi hope you're having an endurable day :)</p>
         </div>
       </div>
     );
@@ -89,24 +73,6 @@ const genres = ["Vaporwave", "Chillwave", "Dungeon Synth", "Synthwave", "Darkwav
       </div>
     );
   }
-
-  if (!userData) {
-    return (
-      <div className="main-body">
-        <section className='desktopSectionProfile'>
-          <div className='profileBanner'>
-            <nav-bar>
-              <SpiritIcon />
-              {navbarButton({ text: "Search", icon : <SearchIcon />, to : "/"})}
-              {navbarButton({ text: "Profile", icon : <ProfileIcon />, to : "/Me"})}
-              {navbarButton({ text: "Message", icon : <MessageIcon />, to : "/Message"})}
-            </nav-bar>
-            <div>Loading...</div>
-          </div>
-        </section>
-      </div>
-    );
-  }
   
   return (
     <div className="main-body">
@@ -118,7 +84,7 @@ const genres = ["Vaporwave", "Chillwave", "Dungeon Synth", "Synthwave", "Darkwav
           {navbarButton({ text: "Profile", icon : <ProfileIcon />, to : "/Me"})}
           {navbarButton({ text: "Message", icon : <MessageIcon />, to : "/Message"})}
         </nav-bar>
-        {profileBannerInfo({user: userData})}
+        {profileBannerInfo()}
       </div>
       <div className='tagsContainer'>
         <h2>Tags</h2>

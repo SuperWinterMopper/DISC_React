@@ -90,7 +90,7 @@ function Message() {
         <nav-bar>
           <SpiritIcon />
           {navbarButton({ text: "Search", icon : <SearchIcon />, to : "/"})}
-          {navbarButton({ text: "Profile", icon : <ProfileIcon />, to : "/Profile"})}
+          {navbarButton({ text: "Profile", icon : <ProfileIcon />, to : "/Me"})}
           {navbarButton({ text: "Message", icon : <MessageIcon />, to : "/Message"})}
         </nav-bar>
 
