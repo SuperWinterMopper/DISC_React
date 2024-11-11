@@ -100,9 +100,11 @@ function App() {
 
     return (
       <div className="user" id={isFollowed ? "followedUser" : ""}>
-        <div className='user-icon'>
-          <img src={props.iconLink} alt="User Icon"/>
-        </div>
+        <Link to={`/profile/${props.username}`}>
+          <div className='user-icon'>
+            <img src={props.iconLink} alt="User Icon"/>
+          </div>
+        </Link>
         <div className="user-info">
             <h3>{props.username}</h3>
             <h4 id={matchness}>{props.matchness}% match</h4>
