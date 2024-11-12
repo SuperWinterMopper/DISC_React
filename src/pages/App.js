@@ -24,6 +24,11 @@ function App() {
     else return "minus-40-match";  
   }, []);
 
+  const changeSort = useCallback(() => {
+    if(sortStyle === "Descending") setSortStyle("Ascending");
+    else setSortStyle("Descending");
+  }, [sortStyle]);
+
   const filteredUsers = useMemo(() => {
     let filtered = usersDisplayData.filter(user =>
       user.username.toLowerCase().includes(searchQuery.toLowerCase())
@@ -55,13 +60,6 @@ function App() {
     }  
     fetchAllUsers();
   }, [])  
-
-
-    
-  function changeSort() {
-    if(sortStyle === "Descending") setSortStyle("Ascending");
-    else setSortStyle("Descending");
-  }
   
   function searchFieldContent() {
     return ( 
@@ -121,8 +119,6 @@ function App() {
       </div>
     )
   }
-
-
 
   return (
     <div className="main-body">
