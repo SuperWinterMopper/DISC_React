@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Mrs+Sheppards&display=swap');
 
-@media (min-width: 601px) {
     * {
         font-family: Montserrat;
     }
@@ -389,4 +388,3 @@
         font-size: 25px;
         font-weight: 400; 
     }
-}

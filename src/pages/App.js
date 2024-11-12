@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useFetcher } from 'react-router-dom';
 import SpiritIcon from '../assets/SpiritIcon';
 import ProfileIcon from '../assets/ProfileIcon';
 import SearchIcon from '../assets/SearchIconSelected';
@@ -27,9 +27,9 @@ function App() {
         const processedData = userData.map(user => ({
           key: user.id,
           username: user.firstName + " " + user.lastName,
+          iconLink: user.profilePicture,
           //for the moment, matchness is randomly assigned. Once I have my own database, it will be fixed
           matchness: Math.floor(Math.random() * 101),  
-          iconLink: user.profilePicture,
         }));
 
         setUsersDisplayData(processedData);
@@ -126,9 +126,9 @@ function App() {
           {navbarButton({ text: "Message", icon : <MessageIcon />, to : "/Message"})}
         </nav-bar>
         <section className='search-container'>
-          {searchFieldContent()}  
+          {searchFieldContent()}
           <div className="users-field">
-            {filteredUsers.map(user=> profile({username: user.username, matchness: user.matchness, iconLink : user.iconLink}))}
+            {filteredUsers.map(user=> profile({key: user.key, username: user.username, matchness: user.matchness, iconLink : user.iconLink}))}
           </div>
         </section>
         <footer>

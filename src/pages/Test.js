@@ -21,7 +21,7 @@ export default function Test() {
         } catch(error) {
             console.log("Error fetching user: " + error.message);
         }
-    }
+    }   
 
     return (
         <button onClick={() => fetchUserByID({userID : 16})}>get id=16 user</button>
