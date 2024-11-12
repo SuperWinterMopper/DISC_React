@@ -1,6 +1,6 @@
 import './App.css';
-import React, { useState, useEffect } from "react";
-import { Link, useFetcher } from 'react-router-dom';
+import React, { useState, useEffect, useRef, useMemo, useContext, useCallback } from "react";
+import { Link } from 'react-router-dom';
 import SpiritIcon from '../assets/SpiritIcon';
 import ProfileIcon from '../assets/ProfileIcon';
 import SearchIcon from '../assets/SearchIconSelected';
@@ -12,27 +12,31 @@ import SortDescendingIcon from '../assets/SortDescendingIcon';
 function App() {
   const [currentPage, setCurrentPage] = useState("Search");
   const [searchQuery, setSearchQuery] = useState("");
-  const [allUsers, setAllUsers] = useState([]);
   const [usersDisplayData, setUsersDisplayData] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [followedUsers, setFollowedUsers] = useState([]);
   const [sortStyle, setSortStyle] = useState("Descending");
+  const allUsersRef = useRef([]);
+
+  const getMatchnessColor = useCallback((matchness) => {
+    if (matchness >= 80) return "plus-80-match";
+    else if (matchness >= 40) return "plus-40-match";
+    else return "minus-40-match";  
+  }, []);
 
   useEffect(() => {
     async function fetchAllUsers() {
       try {
         const response = await fetch("https://disc-assignment-5-users-api.onrender.com/api/users");
         const userData = await response.json();
-        setAllUsers(userData);
-        const processedData = userData.map(user => ({
+        allUsersRef.current = userData.map(user => ({
           key: user.id,
           username: user.firstName + " " + user.lastName,
           iconLink: user.profilePicture,
           //for the moment, matchness is randomly assigned. Once I have my own database, it will be fixed
           matchness: Math.floor(Math.random() * 101),  
         }));
-
-        setUsersDisplayData(processedData);
+        setUsersDisplayData(allUsersRef.current);
       } catch (error) {
         console.log(error.message);
       }
@@ -49,6 +53,8 @@ function App() {
     }
     setFilteredUsers(filtered);
   }, [usersDisplayData, searchQuery, sortStyle]); 
+
+
     
   function changeSort() {
     if(sortStyle === "Descending") setSortStyle("Ascending");
@@ -82,9 +88,7 @@ function App() {
 
   function profile(props) {
     const isFollowed = followedUsers.some(user=> user.username === props.username);
-    let matchness = "minus-40-match";
-    if(props.matchness >= 80) matchness = "plus-80-match";
-    else if(props.matchness >= 40) matchness = "plus-40-match";
+    const matchness = getMatchnessColor(props.matchness)
 
     const changeFollow = () => {
       if(followedUsers.some(user=> user.username === props.username)) 
@@ -115,6 +119,8 @@ function App() {
       </div>
     )
   }
+
+
 
   return (
     <div className="main-body">

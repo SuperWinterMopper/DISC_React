@@ -1,6 +1,6 @@
 import './Profile.css';
 import React, { useState, useEffect } from "react";
-import { Link, useFetcher, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import SpiritIcon from '../assets/SpiritIcon';
 import ProfileIcon from '../assets/ProfileIconSelected';
 import SearchIcon from '../assets/SearchIcon';
