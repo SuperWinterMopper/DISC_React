@@ -10,13 +10,13 @@ import SortAscendingIcon from '../assets/SortAscendingIcon';
 import SortDescendingIcon from '../assets/SortDescendingIcon';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState("Search");
   const [searchQuery, setSearchQuery] = useState("");
   const [usersDisplayData, setUsersDisplayData] = useState([]);
   // const [filteredUsers, setFilteredUsers] = useState([]);
   const [followedUsers, setFollowedUsers] = useState([]);
   const [sortStyle, setSortStyle] = useState("Descending");
   const allUsersRef = useRef([]);
+  const [currentPage, setCurrentPage] = useState("Search");
 
   const getMatchnessColor = useCallback((matchness) => {
     if (matchness >= 80) return "plus-80-match";
@@ -28,6 +28,12 @@ function App() {
     if(sortStyle === "Descending") setSortStyle("Ascending");
     else setSortStyle("Descending");
   }, [sortStyle]);
+
+  const CurrentPageContext = React.createContext({
+    currentPage: "Search",
+    setCurrentPage: () => {},
+  });
+  
 
   const filteredUsers = useMemo(() => {
     let filtered = usersDisplayData.filter(user =>
@@ -75,7 +81,8 @@ function App() {
     )
   }
 
-  function navbarButton(props) {
+  function NavbarButton(props) {
+    const { currentPage, setCurrentPage } = useContext(CurrentPageContext);
     return ( 
       <Link to={props.to} className='nav-bar-link'>
         <button>
@@ -121,25 +128,27 @@ function App() {
   }
 
   return (
-    <div className="main-body">
-      <section className='desktop-section'>
-        <nav-bar>
-          <SpiritIcon />
-          {navbarButton({ text: "Search", icon : <SearchIcon />, to : "/"})}
-          {navbarButton({ text: "Profile", icon : <ProfileIcon />, to : "/Me"})}
-          {navbarButton({ text: "Message", icon : <MessageIcon />, to : "/Message"})}
-        </nav-bar>
-        <section className='search-container'>
-          {searchFieldContent()}
-          <div className="users-field">
-            {filteredUsers.map(user=> profile({key: user.key, username: user.username, matchness: user.matchness, iconLink : user.iconLink}))}
-          </div>
+    <CurrentPageContext.Provider value={{ currentPage, setCurrentPage }}>
+      <div className="main-body">
+        <section className='desktop-section'>
+          <nav-bar>
+            <SpiritIcon />
+            {NavbarButton({ text: "Search", icon : <SearchIcon />, to : "/"})}
+            {NavbarButton({ text: "Profile", icon : <ProfileIcon />, to : "/Me"})}
+            {NavbarButton({ text: "Message", icon : <MessageIcon />, to : "/Message"})}
+          </nav-bar>
+          <section className='search-container'>
+            {searchFieldContent()}
+            <div className="users-field">
+              {filteredUsers.map(user=> profile({key: user.key, username: user.username, matchness: user.matchness, iconLink : user.iconLink}))}
+            </div>
+          </section>
+          <footer>
+            <h5>Spirit</h5>
+          </footer>
         </section>
-        <footer>
-          <h5>Spirit</h5>
-        </footer>
-      </section>
-    </div>
+      </div>
+    </CurrentPageContext.Provider>
   ); 
 }
 
