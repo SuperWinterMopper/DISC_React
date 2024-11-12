@@ -13,7 +13,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState("Search");
   const [searchQuery, setSearchQuery] = useState("");
   const [usersDisplayData, setUsersDisplayData] = useState([]);
-  const [filteredUsers, setFilteredUsers] = useState([]);
+  // const [filteredUsers, setFilteredUsers] = useState([]);
   const [followedUsers, setFollowedUsers] = useState([]);
   const [sortStyle, setSortStyle] = useState("Descending");
   const allUsersRef = useRef([]);
@@ -24,6 +24,18 @@ function App() {
     else return "minus-40-match";  
   }, []);
 
+  const filteredUsers = useMemo(() => {
+    let filtered = usersDisplayData.filter(user =>
+      user.username.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    if (sortStyle === "Descending") {
+      filtered.sort((a, b) => b.matchness - a.matchness);
+    } else {
+      filtered.sort((a, b) => a.matchness - b.matchness);
+    }
+    return filtered;
+  }, [usersDisplayData, searchQuery, sortStyle]);
+  
   useEffect(() => {
     async function fetchAllUsers() {
       try {
@@ -35,24 +47,14 @@ function App() {
           iconLink: user.profilePicture,
           //for the moment, matchness is randomly assigned. Once I have my own database, it will be fixed
           matchness: Math.floor(Math.random() * 101),  
-        }));
+        }));  
         setUsersDisplayData(allUsersRef.current);
       } catch (error) {
         console.log(error.message);
-      }
-    }
+      }  
+    }  
     fetchAllUsers();
-  }, [])
-
-  useEffect(() => {
-    let filtered = usersDisplayData.filter(user => user.username.toLowerCase().includes(searchQuery.toLowerCase()));
-    if(sortStyle === "Descending") {
-      filtered.sort((a, b) => b.matchness - a.matchness);
-    } else {
-      filtered.sort((a, b) => a.matchness - b.matchness);
-    }
-    setFilteredUsers(filtered);
-  }, [usersDisplayData, searchQuery, sortStyle]); 
+  }, [])  
 
 
     
