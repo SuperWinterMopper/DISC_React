@@ -93,7 +93,6 @@ function Message() {
           {navbarButton({ text: "Profile", icon : <ProfileIcon />, to : "/Me"})}
           {navbarButton({ text: "Message", icon : <MessageIcon />, to : "/Message"})}
         </nav-bar>
-
         <section className='search-container'>
           {searchFieldContent()}  
           <div className="messagesField">
