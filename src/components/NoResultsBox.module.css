@@ -19,8 +19,8 @@
     color: white;
     gap: 15px;
     padding: 30px 60px;
-    white-space: nowrap; /* Prevents breaking to a new line */
-    text-overflow: ellipsis; /* Adds "..." if text overflows */
+    white-space: nowrap; 
+    text-overflow: ellipsis; 
     overflow: hidden;
 }
 
