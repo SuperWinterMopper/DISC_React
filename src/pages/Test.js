@@ -1,5 +1,6 @@
 import { useFetcher } from 'react-router-dom';
 import './Profile.css';
+import LoadingBox from '../components/LoadingBox';
 import React, { useState, useEffect } from "react";
 
 export default function Test() {
@@ -24,6 +25,7 @@ export default function Test() {
     }   
 
     return (
-        <button onClick={() => fetchUserByID({userID : 16})}>get id=16 user</button>
+        // <button onClick={() => fetchUserByID({userID : 16})}>get id=16 user</button>
+        <LoadingBox/>
     );
 }

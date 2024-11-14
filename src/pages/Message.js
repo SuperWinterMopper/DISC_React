@@ -6,6 +6,7 @@ import ProfileIcon from '../assets/ProfileIcon';
 import SearchIcon from '../assets/SearchIcon';
 import MessageIcon from '../assets/MessageIconSelected';
 import MagnifyingGlassIcon from '../assets/MagnifyingGlassIcon';
+import LoadingBox from '../components/LoadingBox';
 
 function Message() {
   const [currentPage, setCurrentPage] = useState("Message");
@@ -66,6 +67,17 @@ function Message() {
     )
   }
 
+  function messagesField() {
+    if(filteredUsers.length === 0) {return <LoadingBox/>}
+    else {
+      return (
+        <div className="messagesField">
+          {filteredUsers.map(user => message({username: user.username, message: user.message, time: user.time, messageNum: user.messageNum, iconLink: user.iconLink}))}
+        </div>
+      )
+    }
+  }
+
   function message(props) {
     return (
       <button className="messageBox">
@@ -84,6 +96,8 @@ function Message() {
     )
   }
 
+
+
   return (
     <div className="main-body">
       <section className='desktopSectionMessage'>
@@ -95,9 +109,10 @@ function Message() {
         </nav-bar>
         <section className='search-container'>
           {searchFieldContent()}  
-          <div className="messagesField">
+          {/* <div className="messagesField">
             {filteredUsers.map(user => message({username: user.username, message: user.message, time: user.time, messageNum: user.messageNum, iconLink: user.iconLink}))}
-          </div>
+          </div> */}
+          {messagesField()}
         </section>
         <footer>
           <h5>Spirit</h5>

@@ -13,6 +13,7 @@ export default function useFilteredUsers(searchQuery, sortStyle) {
           key: user.id,
           username: user.firstName + " " + user.lastName,
           iconLink: user.profilePicture,
+          //matchness is random since database doesn't have anything 
           matchness: Math.floor(Math.random() * 101),
         }));
         setUsersDisplayData(temp);

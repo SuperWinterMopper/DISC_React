@@ -10,6 +10,7 @@
   import SortDescendingIcon from '../assets/SortDescendingIcon';
   import Profile from '../components/Profile'
   import useFilteredUsers from '../hooks/useFilteredUsers';
+  import LoadingBox from '../components/LoadingBox';
 
   
   const CurrentPageContext = React.createContext({
@@ -23,12 +24,6 @@
     const [sortStyle, setSortStyle] = useState("Descending");
     const [currentPage, setCurrentPage] = useState("Search");
     const { filteredUsers, loading } = useFilteredUsers(searchQuery, sortStyle);
-
-    const getMatchnessColor = useCallback((matchness) => {
-      if (matchness >= 80) return "plus-80-match";
-      else if (matchness >= 40) return "plus-40-match";
-      else return "minus-40-match";  
-    }, []);
 
     const changeSort = useCallback(() => {
       if(sortStyle === "Descending") setSortStyle("Ascending");
@@ -66,12 +61,29 @@
       } else {
         setFollowedUsers(prev => [...prev, props.userData]);
       }
-    }, []);
+    }, []); 
 
-    if(loading) {
-      return (
-        <h1>LOADING...</h1>
-      )
+    function usersField() {
+      if(loading) {return <LoadingBox/>}
+      else {
+        return (
+          <div className="users-field">
+          {filteredUsers.map(user => (<Profile 
+            key={user.key}
+            username={user.username}
+            matchness={user.matchness}
+            iconLink={user.iconLink}
+            isFollowed={followedUsers.some(followed => followed.username === user.username)}
+            followChange={() => changeFollow({
+              username: user.username,
+              isFollowed: followedUsers.some(followed => followed.username === user.username),
+              userData: {username: user.username, matchness: user.matchness, iconLink: user.iconLink}
+            })}
+          />
+        ))}
+        </div>
+        )
+      }
     }
 
     return (
@@ -86,22 +98,7 @@
             </nav-bar>
             <section className='search-container'>
               {searchFieldContent()}
-              <div className="users-field">
-                {filteredUsers.map(user => (<Profile 
-                  key={user.key}
-                  username={user.username}
-                  matchness={user.matchness}
-                  iconLink={user.iconLink}
-                  isFollowed={followedUsers.some(followed => followed.username === user.username)}
-                  getMatchnessColor={getMatchnessColor}
-                  followChange={() => changeFollow({
-                    username: user.username,
-                    isFollowed: followedUsers.some(followed => followed.username === user.username),
-                    userData: {username: user.username, matchness: user.matchness, iconLink: user.iconLink}
-                  })}
-                />
-              ))}
-              </div>
+              {usersField()}
             </section>
             <footer>
               <h5>Spirit</h5>
