@@ -1,7 +1,7 @@
 import { useFetcher } from 'react-router-dom';
 import './Profile.css';
-import LoadingBox from '../components/LoadingBox';
 import React, { useState, useEffect } from "react";
+import NoResultsBox from '../components/NoResultsBox';
 
 export default function Test() {
     const fetchUsers = async () => {
@@ -26,6 +26,6 @@ export default function Test() {
 
     return (
         // <button onClick={() => fetchUserByID({userID : 16})}>get id=16 user</button>
-        <LoadingBox/>
+        <NoResultsBox/>
     );
 }

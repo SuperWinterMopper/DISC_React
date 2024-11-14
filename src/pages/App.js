@@ -11,6 +11,7 @@
   import Profile from '../components/Profile'
   import useFilteredUsers from '../hooks/useFilteredUsers';
   import LoadingBox from '../components/LoadingBox';
+  import NoResultsBox from '../components/NoResultsBox';
 
   
   const CurrentPageContext = React.createContext({
@@ -65,6 +66,7 @@
 
     function usersField() {
       if(loading) {return <LoadingBox/>}
+      else if(filteredUsers.length === 0) {return <NoResultsBox search={searchQuery}/>}
       else {
         return (
           <div className="users-field">

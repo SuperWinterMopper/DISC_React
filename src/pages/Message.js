@@ -7,6 +7,7 @@ import SearchIcon from '../assets/SearchIcon';
 import MessageIcon from '../assets/MessageIconSelected';
 import MagnifyingGlassIcon from '../assets/MagnifyingGlassIcon';
 import LoadingBox from '../components/LoadingBox';
+import NoResultsBox from '../components/NoResultsBox';
 
 function Message() {
   const [currentPage, setCurrentPage] = useState("Message");
@@ -68,11 +69,12 @@ function Message() {
   }
 
   function messagesField() {
-    if(filteredUsers.length === 0) {return <LoadingBox/>}
+    if (allUsers.length === 0) {return <LoadingBox/>}
+    else if(filteredUsers.length === 0) {return <NoResultsBox search={searchQuery}/>}
     else {
       return (
         <div className="messagesField">
-          {filteredUsers.map(user => message({username: user.username, message: user.message, time: user.time, messageNum: user.messageNum, iconLink: user.iconLink}))}
+          {filteredUsers.map(user => message({key: user.key, username: user.username, message: user.message, time: user.time, messageNum: user.messageNum, iconLink: user.iconLink}))}
         </div>
       )
     }
