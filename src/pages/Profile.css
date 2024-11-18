@@ -1,0 +1,166 @@
+:root {
+    --main-yellow: #FFBD12;
+    --main-red: #F95A2C;
+    --80plus-green: #00C6AE;
+    --40plus-yellow: #eeb114;
+    --40minus-gray: #969BAB;
+    --main-white: #fff;
+    --main-black: #000000;
+    --main-grey: #474A57;
+    --main-blue: #1947E5;
+    --tag-pink: #FFF3F8;
+}
+
+.desktopSectionProfile {
+    background-color: var(--main-yellow);
+    display: flex;
+    flex-direction: column;
+}
+
+.profileBanner {
+    width: 100vw;
+    height: 380px;
+    background-color: var(--main-blue);
+    border-radius: 0 0 52px 0;
+    border-right: 2px solid var(--main-black);
+    border-bottom: 2px solid var(--main-black);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+}
+
+.profileBanner .profileInfoContainer {
+    width: 100%;
+    height: 300px;  
+    margin: 0 0 0 60px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+.profileBanner .profileInfoContainer .profilePicture {
+    width: 200px;
+    height: 200px;
+    min-width: 200px;
+    min-height: 200px;
+    border-radius: 50%;
+    border: 2px solid var(--main-black);
+    overflow: hidden;
+}
+
+.profileBanner .profileInfoContainer .profilePicture img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  
+}
+
+.profileBanner .profileInfoContainer .textInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    max-width: 500px;
+    max-height: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    gap: 20px;
+    color: var(--main-white);
+}
+
+.textInfo h1 {
+    margin: 0;
+    font-size: 36px;
+    font-weight: 800;
+}
+
+.textInfo h2 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    margin-top: -18px;
+}
+
+.textInfo p {
+    margin: 0; 
+}
+
+.profileBanner .profileInfoContainer .textInfo .statisticsField {
+    max-width: 400px;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.profileBanner .profileInfoContainer .textInfo .statisticsField .statistic {
+    width: 70px;    
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.textInfo .statistic h3 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.textInfo .statistic h4 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.tagsContainer {
+    margin: 0 60px 400px 60px;
+
+}
+
+.tagsContainer h2 {
+    font-size: 27px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.tagsContainer .tagsField {
+    margin: 20px 40px 0 40px;
+    min-height: 100px;
+    gap: 8px;
+    border-top: 2px solid var(--main-black);
+}
+
+.tagsContainer .tagsField .tagType {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 40px;  
+    flex-wrap: wrap;
+    margin-top: -10px;
+}
+
+.tagsContainer .tagsField .tagType h2 {
+    font-size: 24px;
+    font-weight: 600;
+    padding-bottom: 14px;
+}
+
+.tagsContainer .tagsField .tagsList {
+    margin: 0 20px 0 20px;
+}
+
+.tagsContainer .tagsField .tagsList .individualTag {
+    background-color: var(--main-white);
+    display: inline-flex;  
+    padding: 10px 12px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 44px;
+    border: 2px solid var(--main-black);
+    max-width: 100%;  
+    margin: 0 4px 10px 0;
+    font-size: 12px;
+    font-weight: 800;
+}

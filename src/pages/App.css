@@ -24,7 +24,6 @@
 
     .main-body {
         margin: 0;
-        background-color: var(--main-yellow);
         display: flex;
         flex-direction: row;
         overflow-x: hidden;
@@ -37,6 +36,7 @@
         width: 100%;
         height: 100%;
         min-width: 100vw; 
+        min-height: 100vh;
     }
 
     nav-bar {
@@ -52,6 +52,10 @@
         background: var(--main-white);
         box-shadow: 0px 1px 0px 0px #18191F inset;
         position: relative;
+    }
+
+    nav-bar .nav-bar-link {
+        text-decoration: none;
     }
 
     nav-bar .spirit-icon {
@@ -71,7 +75,7 @@
     }   
 
     nav-bar button {
-        width: 100%;
+        width: 150px;
         height: 80px;
         display: flex;
         flex-direction: row;
@@ -131,6 +135,8 @@
     nav-bar #selected {
         color: black;
     }
+
+    
 
     .search-container {
         margin-bottom: 300px;
@@ -265,6 +271,8 @@
         position: relative;
     }
 
+    
+
     #followedUser {
         background-color: var(--main-grey);
         color: var(--main-white);
@@ -281,10 +289,21 @@
     .search-container .users-field .user .user-icon {
         width: 185px;
         height: 185px;
-        flex-shrink: 0;
-        border-radius: 95px;
+        border-radius: 50%;
         border: 2px solid var(--Colors-Black, #18191F);
         margin: 10px 0 0 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .search-container .users-field .user .user-icon img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
     }
 
     .search-container .users-field .user .user-info {
