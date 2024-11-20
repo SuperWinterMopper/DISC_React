@@ -7,13 +7,19 @@ export default function useFilteredUsers(searchQuery, sortStyle) {
   useEffect(() => {
     async function fetchAllUsers() {
       try {
-        const response = await fetch("https://disc-assignment-5-users-api.onrender.com/api/users");
+        const response = await fetch(`http://localhost:${process.env.REACT_APP_PORT}/users`);
         const userData = await response.json();
+        console.log(userData);
         const temp = userData.map(user => ({
           key: user.id,
-          username: user.firstName + " " + user.lastName,
-          iconLink: user.profilePicture,
-          //matchness is random since database doesn't have anything 
+          username: user.first_name + " " + user.last_name,
+          iconLink: user.profile_icon,
+          artist_tags: user.artist_tags,
+          genre_tags: user.genre_tags,
+          email: user.email,
+          followers: user.followers,
+          follwing: user.following,
+          //matchness is random for NOW, will find way to calculate
           matchness: Math.floor(Math.random() * 101),
         }));
         setUsersDisplayData(temp);
