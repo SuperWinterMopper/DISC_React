@@ -9,7 +9,6 @@ export default function useFilteredUsers(searchQuery, sortStyle) {
       try {
         const response = await fetch(`http://localhost:${process.env.REACT_APP_PORT}/users`);
         const userData = await response.json();
-        console.log(userData);
         const temp = userData.map(user => ({
           key: user.id,
           username: user.first_name + " " + user.last_name,

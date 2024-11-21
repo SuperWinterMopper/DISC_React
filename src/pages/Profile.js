@@ -1,3 +1,4 @@
+
 import './Profile.css';
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from 'react-router-dom';
@@ -6,10 +7,7 @@ import ProfileIcon from '../assets/ProfileIcon';
 import SearchIcon from '../assets/SearchIcon';
 import MessageIcon from '../assets/MessageIcon';
 import MagnifyingGlassIcon from '../assets/MagnifyingGlassIcon';
-
-const artists = ["Death Grips", "Arca", "Oneohtrix Point Never", "Vangelis", "The Caretaker", "Dälek", "John Maus", "Shabazz Palaces", "Tim Hecker", "Grouper", "Björk", "Sun O)))", "Lorenzo Senni", "Kaitlyn Aurelia Smith", "Mary Lattimore", "Avey Tare", "Scott Walker", "Zola Jesus", "Andy Stott", "Fennesz"];
-
-const genres = ["Vaporwave", "Chillwave", "Dungeon Synth", "Synthwave", "Darkwave", "Drone Metal", "Space Rock", "Post-Rock", "Shoegaze", "Math Rock", "Sludge Metal", "Electropunk", "Folk Metal", "Avant-Garde Jazz", "Blackgaze", "Trip-Hop", "Neoclassical Darkwave", "Breezeway Pop", "Witch House", "Psychedelic Trance"];
+import LoadingBox from '../components/LoadingBox';
 
   export default function Profile() {
   const [currentPage, setCurrentPage] = useState("OtherUser");
@@ -19,9 +17,11 @@ const genres = ["Vaporwave", "Chillwave", "Dungeon Synth", "Synthwave", "Darkwav
   useEffect(() => {
     async function fetchUserData() {
       try {
-        const response = await fetch("https://disc-assignment-5-users-api.onrender.com/api/users");
+        const response = await fetch(`http://localhost:${process.env.REACT_APP_PORT}/users`);
         const data = await response.json();
-        const this_user = data.filter(user => (user.firstName + " " + user.lastName) === profileName.profileID)[0];
+        console.log(profileName.profileID);
+        console.log(data);
+        const this_user = data.filter(user => (user.first_name + " " + user.last_name) === profileName.profileID)[0];
         setUserData(this_user);
       } catch (error) {
         console.log(error.message);
@@ -54,15 +54,15 @@ const genres = ["Vaporwave", "Chillwave", "Dungeon Synth", "Synthwave", "Darkwav
     return (    
       <div className='profileInfoContainer'>
         <div className='profilePicture'>
-          <img src={props.user.profilePicture} alt="User Icon"/>
+          <img src={props.user.profile_icon} alt="User Icon"/>
         </div>
         <div className='textInfo'>
-          <h1>{props.user.firstName + " "+ props.user.lastName}</h1>
+          <h1>{props.user.first_name + " "+ props.user.last_name}</h1>
           <h2>{props.user.email}</h2>
           <div className='statisticsField'>
-            {statistic({num: 40, type: "Tags"})}
-            {statistic({num: 28, type: "Following"})}
-            {statistic({num: 23, type: "Followers"})}
+            {statistic({num: props.user.artist_tags.length + props.user.genre_tags.length, type: "Tags"})}
+            {statistic({num: props.user.following.length, type: "Following"})}
+            {statistic({num: props.user.followers.length, type: "Followers"})}
           </div>
           <p>{props.user.bio}</p>
         </div>
@@ -101,7 +101,7 @@ const genres = ["Vaporwave", "Chillwave", "Dungeon Synth", "Synthwave", "Darkwav
               {navbarButton({ text: "Profile", icon : <ProfileIcon />, to : "/Me"})}
               {navbarButton({ text: "Message", icon : <MessageIcon />, to : "/Message"})}
             </nav-bar>
-            <div>Loading...</div>
+            <LoadingBox/>
           </div>
         </section>
       </div>
@@ -122,8 +122,8 @@ const genres = ["Vaporwave", "Chillwave", "Dungeon Synth", "Synthwave", "Darkwav
       </div>
       <div className='tagsContainer'>
         <h2>Tags</h2>
-        {Tags({type: "Artists", list: artists})}
-        {Tags({type: "Genres", list: genres})}
+        {Tags({type: "Artists", list: userData.artist_tags})}
+        {Tags({type: "Genres", list: userData.genre_tags})}
       </div>
       <footer>
         <h5>Spirit</h5>
