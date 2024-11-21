@@ -19,6 +19,7 @@ export default function useFilteredUsers(searchQuery, sortStyle) {
           email: user.email,
           followers: user.followers,
           follwing: user.following,
+          bio: user.bio,
           //matchness is random for NOW, will find way to calculate
           matchness: Math.floor(Math.random() * 101),
         }));

@@ -8,42 +8,14 @@ import MessageIcon from '../assets/MessageIconSelected';
 import MagnifyingGlassIcon from '../assets/MagnifyingGlassIcon';
 import LoadingBox from '../components/LoadingBox';
 import NoResultsBox from '../components/NoResultsBox';
+import useFilteredUsers from '../hooks/useFilteredUsers';
 
 function Message() {
   const [currentPage, setCurrentPage] = useState("Message");
   const [searchQuery, setSearchQuery] = useState("");
   const [allUsers, setAllUsers] = useState([]);
   const [messageData, setMessageData] = useState([]);
-  const [filteredUsers, setFilteredUsers] = useState([]);
-
-  useEffect(() => {
-    async function fetchAllUsers() {
-      try {
-        const response = await fetch("https://disc-assignment-5-users-api.onrender.com/api/users");
-        const userData = await response.json();
-        setAllUsers(userData);
-        const processedData = userData.map(user => ({
-          key: user.id,
-          username: user.firstName + " " + user.lastName,
-          iconLink: user.profilePicture,
-          message: "Hi, I'm a " + user.bio,
-          //for the moment, these are constant, but with own database can easily fill with real data
-          time: "19h ago",
-          messageNum: 2,  
-        }));
-
-        setMessageData(processedData);
-      } catch (error) {
-        console.log(error.message);
-      }
-    }
-    fetchAllUsers();
-  }, [])
-
-  useEffect(() => {
-    let filtered = messageData.filter(user => user.username.toLowerCase().includes(searchQuery.toLowerCase()));
-    setFilteredUsers(filtered);
-  }, [messageData, searchQuery]); 
+  const { filteredUsers, loading } = useFilteredUsers(searchQuery, "Descending");
 
   function searchFieldContent() {
     return ( 
@@ -69,12 +41,12 @@ function Message() {
   }
 
   function messagesField() {
-    if (allUsers.length === 0) {return <LoadingBox/>}
+    if (loading) {return <LoadingBox/>}
     else if(filteredUsers.length === 0) {return <NoResultsBox search={searchQuery}/>}
     else {
       return (
         <div className="messagesField">
-          {filteredUsers.map(user => message({key: user.key, username: user.username, message: user.message, time: user.time, messageNum: user.messageNum, iconLink: user.iconLink}))}
+          {filteredUsers.map(user => message({key: user.key, username: user.username, message: user.bio, time: "9am", messageNum: 2, iconLink: user.iconLink}))}
         </div>
       )
     }
@@ -98,8 +70,6 @@ function Message() {
     )
   }
 
-
-
   return (
     <div className="main-body">
       <section className='desktopSectionMessage'>
@@ -111,9 +81,6 @@ function Message() {
         </nav-bar>
         <section className='search-container'>
           {searchFieldContent()}  
-          {/* <div className="messagesField">
-            {filteredUsers.map(user => message({username: user.username, message: user.message, time: user.time, messageNum: user.messageNum, iconLink: user.iconLink}))}
-          </div> */}
           {messagesField()}
         </section>
         <footer>
