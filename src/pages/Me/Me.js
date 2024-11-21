@@ -1,11 +1,11 @@
-import './Profile.css';
+import '../Profile/Profile.css';
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
-import SpiritIcon from '../assets/SpiritIcon';
-import ProfileIcon from '../assets/ProfileIconSelected';
-import SearchIcon from '../assets/SearchIcon';
-import MessageIcon from '../assets/MessageIcon';
-import MagnifyingGlassIcon from '../assets/MagnifyingGlassIcon';
+import SpiritIcon from '../../assets/SpiritIcon';
+import ProfileIcon from '../../assets/ProfileIconSelected';
+import SearchIcon from '../../assets/SearchIcon';
+import MessageIcon from '../../assets/MessageIcon';
+import MagnifyingGlassIcon from '../../assets/MagnifyingGlassIcon';
 
 const artists = ["Death Grips", "Arca", "Oneohtrix Point Never", "Vangelis", "The Caretaker", "Dälek", "John Maus", "Shabazz Palaces", "Tim Hecker", "Grouper", "Björk", "Sun O)))", "Lorenzo Senni", "Kaitlyn Aurelia Smith", "Mary Lattimore", "Avey Tare", "Scott Walker", "Zola Jesus", "Andy Stott", "Fennesz"];
 

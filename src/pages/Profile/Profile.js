@@ -2,12 +2,12 @@
 import './Profile.css';
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from 'react-router-dom';
-import SpiritIcon from '../assets/SpiritIcon';
-import ProfileIcon from '../assets/ProfileIcon';
-import SearchIcon from '../assets/SearchIcon';
-import MessageIcon from '../assets/MessageIcon';
-import MagnifyingGlassIcon from '../assets/MagnifyingGlassIcon';
-import LoadingBox from '../components/LoadingBox';
+import SpiritIcon from '../../assets/SpiritIcon';
+import ProfileIcon from '../../assets/ProfileIcon';
+import SearchIcon from '../../assets/SearchIcon';
+import MessageIcon from '../../assets/MessageIcon';
+import MagnifyingGlassIcon from '../../assets/MagnifyingGlassIcon';
+import LoadingBox from '../../components/LoadingBox/LoadingBox';
 
   export default function Profile() {
   const [currentPage, setCurrentPage] = useState("OtherUser");

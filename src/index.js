@@ -4,12 +4,12 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import App from './pages/App';
-import Profile from './pages/Profile';
-import NotFound from './pages/NotFound'
-import Message from './pages/Message';
-import Test from './pages/Test';
-import Me from './pages/Me';
+import App from './pages/App/App';
+import Profile from './pages/Profile/Profile';
+import NotFound from './pages/NotFound/NotFound'
+import Message from './pages/Message/Message';
+import Test from './pages/Test/Test';
+import Me from './pages/Me/Me';
 
 const router = createBrowserRouter([
   {

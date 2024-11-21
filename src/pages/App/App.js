@@ -1,17 +1,17 @@
   import './App.css';
   import React, { useState, useContext, useCallback } from "react";
   import { Link } from 'react-router-dom';
-  import SpiritIcon from '../assets/SpiritIcon';
-  import ProfileIcon from '../assets/ProfileIcon';
-  import SearchIcon from '../assets/SearchIconSelected';
-  import MessageIcon from '../assets/MessageIcon';
-  import MagnifyingGlassIcon from '../assets/MagnifyingGlassIcon';
-  import SortAscendingIcon from '../assets/SortAscendingIcon';
-  import SortDescendingIcon from '../assets/SortDescendingIcon';
-  import Profile from '../components/Profile'
-  import useFilteredUsers from '../hooks/useFilteredUsers';
-  import LoadingBox from '../components/LoadingBox';
-  import NoResultsBox from '../components/NoResultsBox';
+  import SpiritIcon from '../../assets/SpiritIcon';
+  import ProfileIcon from '../../assets/ProfileIcon';
+  import SearchIcon from '../../assets/SearchIconSelected';
+  import MessageIcon from '../../assets/MessageIcon';
+  import MagnifyingGlassIcon from '../../assets/MagnifyingGlassIcon';
+  import SortAscendingIcon from '../../assets/SortAscendingIcon';
+  import SortDescendingIcon from '../../assets/SortDescendingIcon';
+  import Profile from '../../components/ProfileCard/ProfileCard'
+  import useFilteredUsers from '../../hooks/useFilteredUsers';
+  import LoadingBox from '../../components/LoadingBox/LoadingBox';
+  import NoResultsBox from '../../components/NoResultsBox/NoResultsBox';
 
   
   const CurrentPageContext = React.createContext({

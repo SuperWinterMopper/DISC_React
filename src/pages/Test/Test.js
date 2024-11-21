@@ -1,7 +1,6 @@
-import { useFetcher } from 'react-router-dom';
-import './Profile.css';
+import '../Profile/Profile.css';
 import React, { useState, useEffect } from "react";
-import NoResultsBox from '../components/NoResultsBox';
+import NoResultsBox from '../../components/NoResultsBox/NoResultsBox';
 
 export default function Test() {
     const fetchUsers = async () => {
