@@ -1,10 +1,10 @@
   import './App.css';
   import React, { useState, useContext, useCallback } from "react";
   import { Link } from 'react-router-dom';
-  import SpiritIcon from '../../assets/SpiritIcon';
-  import ProfileIcon from '../../assets/ProfileIcon';
-  import SearchIcon from '../../assets/SearchIconSelected';
-  import MessageIcon from '../../assets/MessageIcon';
+  import SpiritIcon from '../../assets/SpiritIcon/SpiritIcon';
+  import ProfileIcon from '../../assets/ProfileIcon/ProfileIcon';
+  import SearchIcon from '../../assets/SearchIcon/SearchIconSelected';
+  import MessageIcon from '../../assets/MessageIcon/MessageIcon';
   import MagnifyingGlassIcon from '../../assets/MagnifyingGlassIcon';
   import SortAscendingIcon from '../../assets/SortAscendingIcon';
   import SortDescendingIcon from '../../assets/SortDescendingIcon';

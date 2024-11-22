@@ -1,10 +1,10 @@
 import './Message.css';
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
-import SpiritIcon from '../../assets/SpiritIcon';
-import ProfileIcon from '../../assets/ProfileIcon';
-import SearchIcon from '../../assets/SearchIcon';
-import MessageIcon from '../../assets/MessageIconSelected';
+import SpiritIcon from '../../assets/SpiritIcon/SpiritIcon';
+import ProfileIcon from '../../assets/ProfileIcon/ProfileIcon';
+import SearchIcon from '../../assets/SearchIcon/SearchIcon';
+import MessageIcon from '../../assets/MessageIcon/MessageIconNotificationSelected';
 import MagnifyingGlassIcon from '../../assets/MagnifyingGlassIcon';
 import LoadingBox from '../../components/LoadingBox/LoadingBox';
 import NoResultsBox from '../../components/NoResultsBox/NoResultsBox';

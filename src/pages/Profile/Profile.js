@@ -2,10 +2,10 @@
 import './Profile.css';
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from 'react-router-dom';
-import SpiritIcon from '../../assets/SpiritIcon';
-import ProfileIcon from '../../assets/ProfileIcon';
-import SearchIcon from '../../assets/SearchIcon';
-import MessageIcon from '../../assets/MessageIcon';
+import SpiritIcon from '../../assets/SpiritIcon/SpiritIcon';
+import ProfileIcon from '../../assets/ProfileIcon/ProfileIcon';
+import SearchIcon from '../../assets/SearchIcon/SearchIcon';
+import MessageIcon from '../../assets/MessageIcon/MessageIcon';
 import MagnifyingGlassIcon from '../../assets/MagnifyingGlassIcon';
 import LoadingBox from '../../components/LoadingBox/LoadingBox';
 

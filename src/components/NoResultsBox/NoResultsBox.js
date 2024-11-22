@@ -1,5 +1,4 @@
 import styles from './NoResultsBox.module.css'
-
 export default function NoResultsBox(props) {
     return (
         <div className={styles.noResultsFillerContainer}>

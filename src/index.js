@@ -10,6 +10,7 @@ import NotFound from './pages/NotFound/NotFound'
 import Message from './pages/Message/Message';
 import Test from './pages/Test/Test';
 import Me from './pages/Me/Me';
+import Login from './pages/Login/Login';
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
   {
     path: '/me',
     element: <Me />
+  },
+  {
+    path: '/login',
+    element: <Login />
   }
 ]); 
 
