@@ -56,14 +56,12 @@ function Message() {
 
   return (
     <div className="main-body">
-      <section className='desktopSectionMessage'>
       <NavigationBar currentPage={"Message"}/>
       <section className='search-container'>
-          {searchFieldContent()}  
-          {messagesField()}
-        </section>
-        <Footer />
-        </section>
+        {searchFieldContent()}  
+        {messagesField()}
+      </section>
+      <Footer />
     </div>
   ); 
 }
