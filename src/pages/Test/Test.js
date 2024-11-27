@@ -1,4 +1,3 @@
-import '../Profile/Profile.css';
 import React, { useState, useEffect } from "react";
 import NoResultsBox from '../../components/NoResultsBox/NoResultsBox';
 

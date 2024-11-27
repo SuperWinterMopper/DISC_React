@@ -1,11 +1,10 @@
-
-import './Profile.css';
 import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import MagnifyingGlassIcon from '../../assets/MagnifyingGlassIcon';
 import LoadingBox from '../../components/LoadingBox/LoadingBox';
 import Footer from '../../components/Footer/Footer';
 import NavigationBar from '../../components/NavigationBar/NavigationBar';
+import styles from './Profile.module.css'
 
 
   export default function Profile() {
@@ -30,7 +29,7 @@ import NavigationBar from '../../components/NavigationBar/NavigationBar';
 
   function statistic(props) {
     return (
-      <div className='statistic'>
+      <div className={styles.statistic}>
         <h3>{props.num}</h3>
         <h4>{props.type}</h4>
       </div>
@@ -39,14 +38,14 @@ import NavigationBar from '../../components/NavigationBar/NavigationBar';
 
   function profileBannerInfo(props) {
     return (    
-      <div className='profileInfoContainer'>
-        <div className='profilePicture'>
+      <div className={styles.profileInfoContainer}>
+        <div className={styles.profilePicture}>
           <img src={props.user.profile_icon} alt="User Icon"/>
         </div>
-        <div className='textInfo'>
+        <div className={styles.textInfo}>
           <h1>{props.user.first_name + " "+ props.user.last_name}</h1>
           <h2>{props.user.email}</h2>
-          <div className='statisticsField'>
+          <div className={styles.statisticsField}>
             {statistic({num: props.user.artist_tags.length + props.user.genre_tags.length, type: "Tags"})}
             {statistic({num: props.user.following.length, type: "Following"})}
             {statistic({num: props.user.followers.length, type: "Followers"})}
@@ -59,18 +58,18 @@ import NavigationBar from '../../components/NavigationBar/NavigationBar';
 
   function Tag(props) {
     return (
-      <div className='individualTag'>{props.itemName}</div>
+      <div className={styles.individualTag}>{props.itemName}</div>
     );
   };
 
   function Tags(props) { 
     return (
-      <div className='tagsField'>
-        <div className='tagType'>
+      <div className={styles.tagsField}>
+        <div className={styles.tagType}>
           <h2>{props.type}</h2>
           {<MagnifyingGlassIcon />}
         </div>
-        <div className='tagsList'>
+        <div className={styles.tagsList}>
           {props.list.map(item => <Tag itemName={item} />)}
         </div>
       </div>
@@ -79,9 +78,9 @@ import NavigationBar from '../../components/NavigationBar/NavigationBar';
 
   if (!userData) {
     return (
-      <div className="main-body">
-        <section className='desktopSectionProfile'>
-          <div className='profileBanner'>
+      <div className={styles.mainBody}>
+        <section className={styles.desktopSectionProfile}>
+          <div className={styles.profileBanner}>
             <NavigationBar currentPage={"Message"}/>
             <LoadingBox/>
           </div>
@@ -91,19 +90,19 @@ import NavigationBar from '../../components/NavigationBar/NavigationBar';
   }
   
   return (
-    <div className="main-body">
-      <section className='desktopSectionProfile'>
-        <div className='profileBanner'>
+    <div className={styles.mainBody}>
+      {/* <section className={styles.desktopSectionProfile}> */}
+        <div className={styles.profileBanner}>
         <NavigationBar currentPage={"OtherUser"}/>
         {profileBannerInfo({user: userData})}
         </div>
-        <div className='tagsContainer'>
+        <div className={styles.tagsContainer}>
           <h2>Tags</h2>
           {Tags({type: "Artists", list: userData.artist_tags})}
           {Tags({type: "Genres", list: userData.genre_tags})}
         </div>
         <Footer />
-      </section>
+      {/* </section> */}
   </div>
   );
 }
