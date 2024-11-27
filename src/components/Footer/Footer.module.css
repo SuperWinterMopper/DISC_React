@@ -1,0 +1,19 @@
+footer {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    width: 100vw; 
+    height: 50px; 
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: var(--main-black);
+}
+
+footer h1 {
+    color: var(--Main-Yellow, #FFBD12);
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-family: "Mrs Sheppards";
+    font-size: 25px;
+    font-weight: 400; 
+}

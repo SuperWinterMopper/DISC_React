@@ -10,7 +10,8 @@ import NotFound from './pages/NotFound/NotFound'
 import Message from './pages/Message/Message';
 import Test from './pages/Test/Test';
 import Me from './pages/Me/Me';
-import Login from './pages/Login/Login';
+import Login from './pages/Authentication/Login';
+import SignUp from './pages/Authentication/SignUp'
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <Login />
+  },
+  {
+    path: '/signup',
+    element: <SignUp />
   }
 ]); 
 

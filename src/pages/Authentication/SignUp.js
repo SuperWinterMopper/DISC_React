@@ -1,11 +1,9 @@
-import styles from './Login.module.css'
-import React, { useState, useContext, useCallback } from "react";
+import styles from './Login.module.css';
+import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import SpiritIcon from '../../assets/SpiritIcon/SpiritIconSVG.svg';
 import ProfileIcon from '../../assets/ProfileIcon/ProfileIconSVG';
-import SearchIcon from '../../assets/SearchIcon/SearchIcon';
-import MessageIcon from '../../assets/MessageIcon/MessageIconNotification';
-import LockIcon from '../../assets/LockIcon'
+import LockIcon from '../../assets/LockIcon';
 
 const CurrentPageContext = React.createContext({
   currentPage: "",
@@ -47,9 +45,11 @@ export default function Login() {
       <div className={styles.loginBox}>
         <h1>Login</h1>
         <form onSubmit={handleSubmit}>
-          {loginInput({fieldType: "email", data: formData.email, icon: LockIcon})}
-          {loginInput({fieldType: "password", data: formData.password, icon: ProfileIcon})}
+          {loginInput({fieldType: "email", data: formData.email, icon: ProfileIcon})}
+          {loginInput({fieldType: "password", data: formData.password, icon: LockIcon})}
         </form>
+        <button className={styles.enterButton}>Sign In</button>
+        <p>Have an account? <Link to="/login">Log in</Link></p>
       </div>
     );
   }; 

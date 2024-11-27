@@ -1,20 +1,15 @@
 import './Message.css';
-import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
-import SpiritIcon from '../../assets/SpiritIcon/SpiritIcon';
-import ProfileIcon from '../../assets/ProfileIcon/ProfileIcon';
-import SearchIcon from '../../assets/SearchIcon/SearchIcon';
-import MessageIcon from '../../assets/MessageIcon/MessageIconNotificationSelected';
+import React, { useState } from "react";
 import MagnifyingGlassIcon from '../../assets/MagnifyingGlassIcon';
 import LoadingBox from '../../components/LoadingBox/LoadingBox';
 import NoResultsBox from '../../components/NoResultsBox/NoResultsBox';
 import useFilteredUsers from '../../hooks/useFilteredUsers';
+import Footer from '../../components/Footer/Footer';
+import NavigationBar from '../../components/NavigationBar/NavigationBar';
+
 
 function Message() {
-  const [currentPage, setCurrentPage] = useState("Message");
   const [searchQuery, setSearchQuery] = useState("");
-  const [allUsers, setAllUsers] = useState([]);
-  const [messageData, setMessageData] = useState([]);
   const { filteredUsers, loading } = useFilteredUsers(searchQuery, "Descending");
 
   function searchFieldContent() {
@@ -26,17 +21,6 @@ function Message() {
             {<MagnifyingGlassIcon />}
         </div>
       </div> 
-    )
-  }
-
-  function navbarButton(props) {
-    return ( 
-      <Link to={props.to} className='nav-bar-link'>
-        <button>
-          {props.icon}
-          <p id={props.text === currentPage ? "selected" : ""}>{props.text}</p>
-        </button>
-      </Link>
     )
   }
 
@@ -73,20 +57,13 @@ function Message() {
   return (
     <div className="main-body">
       <section className='desktopSectionMessage'>
-        <nav-bar>
-          <SpiritIcon />
-          {navbarButton({ text: "Search", icon : <SearchIcon />, to : "/"})}
-          {navbarButton({ text: "Profile", icon : <ProfileIcon />, to : "/Me"})}
-          {navbarButton({ text: "Message", icon : <MessageIcon />, to : "/Message"})}
-        </nav-bar>
-        <section className='search-container'>
+      <NavigationBar currentPage={"Message"}/>
+      <section className='search-container'>
           {searchFieldContent()}  
           {messagesField()}
         </section>
-        <footer>
-          <h5>Spirit</h5>
-        </footer>
-      </section>
+        <Footer />
+        </section>
     </div>
   ); 
 }

@@ -1,30 +1,15 @@
-import '../Profile/Profile.css';
+import '../Me/Me.css';
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
-import SpiritIcon from '../../assets/SpiritIcon/SpiritIcon';
-import ProfileIcon from '../../assets/ProfileIcon/ProfileIconSelected';
-import SearchIcon from '../../assets/SearchIcon/SearchIcon';
-import MessageIcon from '../../assets/MessageIcon/MessageIcon';
 import MagnifyingGlassIcon from '../../assets/MagnifyingGlassIcon';
+import Footer from '../../components/Footer/Footer';
+import NavigationBar from '../../components/NavigationBar/NavigationBar';
 
 const artists = ["Death Grips", "Arca", "Oneohtrix Point Never", "Vangelis", "The Caretaker", "Dälek", "John Maus", "Shabazz Palaces", "Tim Hecker", "Grouper", "Björk", "Sun O)))", "Lorenzo Senni", "Kaitlyn Aurelia Smith", "Mary Lattimore", "Avey Tare", "Scott Walker", "Zola Jesus", "Andy Stott", "Fennesz"];
 
 const genres = ["Vaporwave", "Chillwave", "Dungeon Synth", "Synthwave", "Darkwave", "Drone Metal", "Space Rock", "Post-Rock", "Shoegaze", "Math Rock", "Sludge Metal", "Electropunk", "Folk Metal", "Avant-Garde Jazz", "Blackgaze", "Trip-Hop", "Neoclassical Darkwave", "Breezeway Pop", "Witch House", "Psychedelic Trance"];
 
   export default function Profile() {
-  const [currentPage, setCurrentPage] = useState("Profile");
-
-  function navbarButton(props) {
-    return ( 
-      <Link to={props.to} className='nav-bar-link'>
-        <button>
-          {props.icon}
-          <p id={props.text === currentPage ? "selected" : ""}>{props.text}</p>
-        </button>
-      </Link>
-    )
-  }
-
   function statistic(props) {
     return (
       <div className='statistic'>
@@ -78,23 +63,16 @@ const genres = ["Vaporwave", "Chillwave", "Dungeon Synth", "Synthwave", "Darkwav
     <div className="main-body">
     <section className='desktopSectionProfile'>
       <div className='profileBanner'>
-        <nav-bar>
-          <SpiritIcon />
-          {navbarButton({ text: "Search", icon : <SearchIcon />, to : "/"})}
-          {navbarButton({ text: "Profile", icon : <ProfileIcon />, to : "/Me"})}
-          {navbarButton({ text: "Message", icon : <MessageIcon />, to : "/Message"})}
-        </nav-bar>
-        {profileBannerInfo()}
+      <NavigationBar currentPage={"Profile"}/>
+      {profileBannerInfo()}
       </div>
       <div className='tagsContainer'>
         <h2>Tags</h2>
         {Tags({type: "Artists", list: artists})}
         {Tags({type: "Genres", list: genres})}
       </div>
-      <footer>
-        <h5>Spirit</h5>
-      </footer>
-    </section>
+      <Footer />
+      </section>
   </div>
   );
 }
