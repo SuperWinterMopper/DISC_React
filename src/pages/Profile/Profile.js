@@ -6,7 +6,6 @@ import Footer from '../../components/Footer/Footer';
 import NavigationBar from '../../components/NavigationBar/NavigationBar';
 import styles from './Profile.module.css'
 
-
   export default function Profile() {
   const [userData, setUserData] = useState(null);
   const profileName = useParams();
@@ -14,10 +13,8 @@ import styles from './Profile.module.css'
   useEffect(() => {
     async function fetchUserData() {
       try {
-        const response = await fetch(`http://localhost:${process.env.REACT_APP_PORT}/users`);
+        const response = await fetch(`http://localhost:${process.env.REACT_APP_PORT}/users/profiles`);
         const data = await response.json();
-        console.log(profileName.profileID);
-        console.log(data);
         const this_user = data.filter(user => (user.first_name + " " + user.last_name) === profileName.profileID)[0];
         setUserData(this_user);
       } catch (error) {
@@ -87,8 +84,8 @@ import styles from './Profile.module.css'
         </section>
       </div>
     );
-  }
-  
+  };
+
   return (
     <div className={styles.mainBody}>
       <div className={styles.profileBanner}>
