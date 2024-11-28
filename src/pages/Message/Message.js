@@ -59,8 +59,8 @@ function Message() {
       <NavigationBar currentPage={"Message"}/>
       <section className='search-container'>
         {searchFieldContent()}  
-        {messagesField()}
-      </section>
+        {messagesField()} 
+      </section> 
       <Footer />
     </div>
   ); 

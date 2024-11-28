@@ -10,7 +10,7 @@ const Profile = React.memo(function Profile({ username, matchness, iconLink, isF
   const getMatchnessColor = useCallback((matchness) => {
     if (matchness >= 80) return "plus-80-match";
     else if (matchness >= 40) return "plus-40-match";
-    else return "minus-40-match";  
+    else return "minus-40-match";
   }, []);
 
   return (

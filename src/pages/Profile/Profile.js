@@ -91,18 +91,16 @@ import styles from './Profile.module.css'
   
   return (
     <div className={styles.mainBody}>
-      {/* <section className={styles.desktopSectionProfile}> */}
-        <div className={styles.profileBanner}>
-        <NavigationBar currentPage={"OtherUser"}/>
-        {profileBannerInfo({user: userData})}
-        </div>
-        <div className={styles.tagsContainer}>
-          <h2>Tags</h2>
-          {Tags({type: "Artists", list: userData.artist_tags})}
-          {Tags({type: "Genres", list: userData.genre_tags})}
-        </div>
-        <Footer />
-      {/* </section> */}
+      <div className={styles.profileBanner}>
+      <NavigationBar currentPage={"OtherUser"}/>
+      {profileBannerInfo({user: userData})}
+      </div>
+      <div className={styles.tagsContainer}>
+        <h2>Tags</h2>
+        {Tags({type: "Artists", list: userData.artist_tags})}
+        {Tags({type: "Genres", list: userData.genre_tags})}
+      </div>
+      <Footer />
   </div>
   );
 }
