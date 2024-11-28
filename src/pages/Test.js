@@ -1,6 +1,7 @@
 import { useFetcher } from 'react-router-dom';
 import './Profile.css';
 import React, { useState, useEffect } from "react";
+import NoResultsBox from '../components/NoResultsBox';
 
 export default function Test() {
     const fetchUsers = async () => {
@@ -21,9 +22,10 @@ export default function Test() {
         } catch(error) {
             console.log("Error fetching user: " + error.message);
         }
-    }
+    }   
 
     return (
-        <button onClick={() => fetchUserByID({userID : 16})}>get id=16 user</button>
+        // <button onClick={() => fetchUserByID({userID : 16})}>get id=16 user</button>
+        <NoResultsBox/>
     );
 }

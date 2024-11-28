@@ -1,142 +1,114 @@
-import './App.css';
-import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
-import SpiritIcon from '../assets/SpiritIcon';
-import ProfileIcon from '../assets/ProfileIcon';
-import SearchIcon from '../assets/SearchIconSelected';
-import MessageIcon from '../assets/MessageIcon';
-import MagnifyingGlassIcon from '../assets/MagnifyingGlassIcon';
-import SortAscendingIcon from '../assets/SortAscendingIcon';
-import SortDescendingIcon from '../assets/SortDescendingIcon';
+  import './App.css';
+  import React, { useState, useContext, useCallback } from "react";
+  import { Link } from 'react-router-dom';
+  import SpiritIcon from '../assets/SpiritIcon';
+  import ProfileIcon from '../assets/ProfileIcon';
+  import SearchIcon from '../assets/SearchIconSelected';
+  import MessageIcon from '../assets/MessageIcon';
+  import MagnifyingGlassIcon from '../assets/MagnifyingGlassIcon';
+  import SortAscendingIcon from '../assets/SortAscendingIcon';
+  import SortDescendingIcon from '../assets/SortDescendingIcon';
+  import Profile from '../components/Profile'
+  import useFilteredUsers from '../hooks/useFilteredUsers';
+  import LoadingBox from '../components/LoadingBox';
+  import NoResultsBox from '../components/NoResultsBox';
 
-function App() {
-  const [currentPage, setCurrentPage] = useState("Search");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [allUsers, setAllUsers] = useState([]);
-  const [usersDisplayData, setUsersDisplayData] = useState([]);
-  const [filteredUsers, setFilteredUsers] = useState([]);
-  const [followedUsers, setFollowedUsers] = useState([]);
-  const [sortStyle, setSortStyle] = useState("Descending");
-
-  useEffect(() => {
-    async function fetchAllUsers() {
-      try {
-        const response = await fetch("https://disc-assignment-5-users-api.onrender.com/api/users");
-        const userData = await response.json();
-        setAllUsers(userData);
-        const processedData = userData.map(user => ({
-          key: user.id,
-          username: user.firstName + " " + user.lastName,
-          //for the moment, matchness is randomly assigned. Once I have my own database, it will be fixed
-          matchness: Math.floor(Math.random() * 101),  
-          iconLink: user.profilePicture,
-        }));
-
-        setUsersDisplayData(processedData);
-      } catch (error) {
-        console.log(error.message);
-      }
-    }
-    fetchAllUsers();
-  }, [])
-
-  useEffect(() => {
-    let filtered = usersDisplayData.filter(user => user.username.toLowerCase().includes(searchQuery.toLowerCase()));
-    if(sortStyle === "Descending") {
-      filtered.sort((a, b) => b.matchness - a.matchness);
-    } else {
-      filtered.sort((a, b) => a.matchness - b.matchness);
-    }
-    setFilteredUsers(filtered);
-  }, [usersDisplayData, searchQuery, sortStyle]); 
-    
-  function changeSort() {
-    if(sortStyle === "Descending") setSortStyle("Ascending");
-    else setSortStyle("Descending");
-  }
   
-  function searchFieldContent() {
-    return ( 
-      <div className="search-field">
-        <h1>Search</h1>
-        <div className="search-bar">
-            <button className="sort-icon" onClick={changeSort}>{sortStyle === "Descending" ? <SortDescendingIcon /> : <SortAscendingIcon/>}</button>
-            <input type="text" placeholder="Search based on your preferences..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}></input>
-            {<MagnifyingGlassIcon />}
-        </div>
-        <div className="recommended" id={searchQuery === "" ? "" : "hidden"}><h2>Recommended:</h2></div>  
-      </div> 
-    )
-  }
+  const CurrentPageContext = React.createContext({
+    currentPage: "Search",
+    setCurrentPage: () => {},
+  });
+  
+  function App() {
+    const [searchQuery, setSearchQuery] = useState("");
+    const [followedUsers, setFollowedUsers] = useState([]);
+    const [sortStyle, setSortStyle] = useState("Descending");
+    const [currentPage, setCurrentPage] = useState("Search");
+    const { filteredUsers, loading } = useFilteredUsers(searchQuery, sortStyle);
 
-  function navbarButton(props) {
-    return ( 
-      <Link to={props.to} className='nav-bar-link'>
-        <button>
-          {props.icon}
-          <p id={props.text === currentPage ? "selected" : ""}>{props.text}</p>
-        </button>
-      </Link>
-    )
-  }
+    const changeSort = useCallback(() => {
+      if(sortStyle === "Descending") setSortStyle("Ascending");
+      else setSortStyle("Descending");
+    }, [sortStyle]);
+    
+    function searchFieldContent() {
+      return ( 
+        <div className="search-field">
+          <h1>Search</h1>
+          <div className="search-bar">
+              <button className="sort-icon" onClick={changeSort}>{sortStyle === "Descending" ? <SortDescendingIcon /> : <SortAscendingIcon/>}</button>
+              <input type="text" placeholder="Search based on your preferences..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}></input>
+              {<MagnifyingGlassIcon />}
+          </div>
+          <div className="recommended" id={searchQuery === "" ? "" : "hidden"}><h2>Recommended:</h2></div>  
+        </div> 
+      ) 
+    }    
 
-  function profile(props) {
-    const isFollowed = followedUsers.some(user=> user.username === props.username);
-    let matchness = "minus-40-match";
-    if(props.matchness >= 80) matchness = "plus-80-match";
-    else if(props.matchness >= 40) matchness = "plus-40-match";
+    function NavbarButton(props) {
+      const { currentPage } = useContext(CurrentPageContext);
+      return ( 
+        <Link to={props.to} className='nav-bar-link'>
+          <button>
+            {props.icon}
+            <p id={props.text === currentPage ? "selected" : ""}>{props.text}</p>
+          </button>
+        </Link>
+      )
+    }
+    const changeFollow = useCallback((props) => {
+      if (props.isFollowed) {
+        setFollowedUsers(prev => prev.filter(user => user.username !== props.username));
+      } else {
+        setFollowedUsers(prev => [...prev, props.userData]);
+      }
+    }, []); 
 
-    const changeFollow = () => {
-      if(followedUsers.some(user=> user.username === props.username)) 
-        setFollowedUsers(followedUsers.filter(user=> user.username !== props.username))
+    function usersField() {
+      if(loading) {return <LoadingBox/>}
+      else if(filteredUsers.length === 0) {return <NoResultsBox search={searchQuery}/>}
       else {
-        setFollowedUsers([ ...followedUsers, {
-          username: props.username, 
-          matchesss: props.matchness,
-          iconLink: props.iconLink
-        }])  
+        return (
+          <div className="users-field">
+          {filteredUsers.map(user => (<Profile 
+            key={user.key}
+            username={user.username}
+            matchness={user.matchness}
+            iconLink={user.iconLink}
+            isFollowed={followedUsers.some(followed => followed.username === user.username)}
+            followChange={() => changeFollow({
+              username: user.username,
+              isFollowed: followedUsers.some(followed => followed.username === user.username),
+              userData: {username: user.username, matchness: user.matchness, iconLink: user.iconLink}
+            })}
+          />
+        ))}
+        </div>
+        )
       }
     }
 
     return (
-      <div className="user" id={isFollowed ? "followedUser" : ""}>
-        <Link to={`/profile/${props.username}`}>
-          <div className='user-icon'>
-            <img src={props.iconLink} alt="User Icon"/>
-          </div>
-        </Link>
-        <div className="user-info">
-            <h3>{props.username}</h3>
-            <h4 id={matchness}>{props.matchness}% match</h4>
+      <CurrentPageContext.Provider value={{ currentPage, setCurrentPage }}>
+        <div className="main-body">
+          <section className='desktop-section'>
+            <nav-bar>
+              <SpiritIcon />
+              {NavbarButton({ text: "Search", icon : <SearchIcon />, to : "/"})}
+              {NavbarButton({ text: "Profile", icon : <ProfileIcon />, to : "/Me"})}
+              {NavbarButton({ text: "Message", icon : <MessageIcon />, to : "/Message"})}
+            </nav-bar>
+            <section className='search-container'>
+              {searchFieldContent()}
+              {usersField()}
+            </section>
+            <footer>
+              <h5>Spirit</h5>
+            </footer>
+          </section>
         </div>
-        <button className="follow-button" id={isFollowed ? "followed" : "unfollowed"} onClick={changeFollow}>
-          {isFollowed ? "Following" : "Follow"}
-        </button>
-      </div>
-    )
+      </CurrentPageContext.Provider>
+    ); 
   }
 
-  return (
-    <div className="main-body">
-      <section className='desktop-section'>
-        <nav-bar>
-          <SpiritIcon />
-          {navbarButton({ text: "Search", icon : <SearchIcon />, to : "/"})}
-          {navbarButton({ text: "Profile", icon : <ProfileIcon />, to : "/Me"})}
-          {navbarButton({ text: "Message", icon : <MessageIcon />, to : "/Message"})}
-        </nav-bar>
-        <section className='search-container'>
-          {searchFieldContent()}  
-          <div className="users-field">
-            {filteredUsers.map(user=> profile({username: user.username, matchness: user.matchness, iconLink : user.iconLink}))}
-          </div>
-        </section>
-        <footer>
-          <h5>Spirit</h5>
-        </footer>
-      </section>
-    </div>
-  ); 
-}
-
-export default App;
+  export default App;

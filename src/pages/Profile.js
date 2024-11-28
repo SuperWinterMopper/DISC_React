@@ -1,8 +1,8 @@
 import './Profile.css';
 import React, { useState, useEffect } from "react";
-import { Link, useFetcher, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import SpiritIcon from '../assets/SpiritIcon';
-import ProfileIcon from '../assets/ProfileIconSelected';
+import ProfileIcon from '../assets/ProfileIcon';
 import SearchIcon from '../assets/SearchIcon';
 import MessageIcon from '../assets/MessageIcon';
 import MagnifyingGlassIcon from '../assets/MagnifyingGlassIcon';
@@ -12,7 +12,7 @@ const artists = ["Death Grips", "Arca", "Oneohtrix Point Never", "Vangelis", "Th
 const genres = ["Vaporwave", "Chillwave", "Dungeon Synth", "Synthwave", "Darkwave", "Drone Metal", "Space Rock", "Post-Rock", "Shoegaze", "Math Rock", "Sludge Metal", "Electropunk", "Folk Metal", "Avant-Garde Jazz", "Blackgaze", "Trip-Hop", "Neoclassical Darkwave", "Breezeway Pop", "Witch House", "Psychedelic Trance"];
 
   export default function Profile() {
-  const [currentPage, setCurrentPage] = useState("Profile");
+  const [currentPage, setCurrentPage] = useState("OtherUser");
   const [userData, setUserData] = useState(null);
   const profileName = useParams();
 
