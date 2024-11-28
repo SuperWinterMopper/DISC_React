@@ -1,5 +1,5 @@
 import styles from './Login.module.css'
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import SpiritIcon from '../../assets/SpiritIcon/SpiritIconSVG.svg';
 import ProfileIcon from '../../assets/ProfileIcon/ProfileIconSVG';
@@ -7,9 +7,55 @@ import LockIcon from '../../assets/LockIcon';
 import Footer from '../../components/Footer/Footer';
 
 export default function Login() {
-  const [formData, setFormData] = useState({
-    email: "", password: "",
-  });
+  const [formData, setFormData] = useState({email: "", password: ""});
+
+  const [token, setToken] = useState("");
+  const [error, setError] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    const hashParams = new URLSearchParams(window.location.hash.substring(1));
+    const accessToken = hashParams.get("access_token");
+
+    if (accessToken) {
+      setToken(accessToken);
+      window.history.replaceState(null, "", window.location.pathname);
+    }
+  }, []);
+
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`http://localhost:${process.env.REACT_APP_PORT}/users/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({ email: formData.email, password: formData.password }),
+      });
+
+      const data = await response.json();
+      if (data.error) throw new Error(data.error);
+
+      setToken(data.token);
+      setError("");
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  // const handleSignIn = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const response = await fetch(`http://localhost:${process.env.REACT_APP_PORT}/users/connection`);
+  //     const data = await response.json();
+  //     console.log(data);
+  //   } catch(err) {
+  //     console.log(err);
+  //   }
+  // }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,12 +63,6 @@ export default function Login() {
       ...prevData,
       [name]: value,
     }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault(); 
-    console.log("Form submitted:", formData);
-    // send to API here
   };
 
   function loginInput(props) {
@@ -38,7 +78,7 @@ export default function Login() {
     return (
       <div className={styles.loginBox}>
         <h1>Login</h1>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSignIn}>
           {loginInput({fieldType: "email", data: formData.email, placeholder: "Email", icon: ProfileIcon})}
           {loginInput({fieldType: "password", data: formData.password, placeholder: "Password", icon: LockIcon})}
           <button className={styles.enterButton} type="submit">Sign In</button>
