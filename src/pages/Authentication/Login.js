@@ -41,9 +41,10 @@ export default function Login() {
 
       setToken(data.token);
       setError("");
+      console.log(token);
     } catch (err) {
       setError(err.message);
-    }
+    };
   };
 
   // const handleSignIn = async (e) => {
