@@ -5,24 +5,24 @@ import SpiritIcon from '../../assets/SpiritIcon/SpiritIconSVG.svg';
 import ProfileIcon from '../../assets/ProfileIcon/ProfileIconSVG';
 import LockIcon from '../../assets/LockIcon';
 import Footer from '../../components/Footer/Footer';
+import { AuthProvider, useAuth } from '../../hooks/useSpiritAuth'; 
+
+
 
 export default function Login() {
   const [formData, setFormData] = useState({email: "", password: ""});
 
   const [token, setToken] = useState("");
-  const [error, setError] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
-  useEffect(() => {
-    const hashParams = new URLSearchParams(window.location.hash.substring(1));
-    const accessToken = hashParams.get("access_token");
+  // useEffect(() => {
+  //   const hashParams = new URLSearchParams(window.location.hash.substring(1));
+  //   const accessToken = hashParams.get("access_token");
 
-    if (accessToken) {
-      setToken(accessToken);
-      window.history.replaceState(null, "", window.location.pathname);
-    }
-  }, []);
+  //   if (accessToken) {
+  //     setToken(accessToken);
+  //     window.history.replaceState(null, "", window.location.pathname);
+  //   }
+  // }, []);
 
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -40,23 +40,11 @@ export default function Login() {
       if (data.error) throw new Error(data.error);
 
       setToken(data.token);
-      setError("");
       console.log(token);
     } catch (err) {
-      setError(err.message);
+      console.log(err.message);    
     };
   };
-
-  // const handleSignIn = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const response = await fetch(`http://localhost:${process.env.REACT_APP_PORT}/users/connection`);
-  //     const data = await response.json();
-  //     console.log(data);
-  //   } catch(err) {
-  //     console.log(err);
-  //   }
-  // }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -66,7 +54,7 @@ export default function Login() {
     }));
   };
 
-  function loginInput(props) {
+  function LoginInput(props) {
     return ( 
       <div className={styles.inputFieldBox}>
         <props.icon />
@@ -74,14 +62,14 @@ export default function Login() {
       </div>
     );
   };
-  
-  function loginBox() {
+
+  function LoginBox() {
     return (
       <div className={styles.loginBox}>
         <h1>Login</h1>
         <form onSubmit={handleSignIn}>
-          {loginInput({fieldType: "email", data: formData.email, placeholder: "Email", icon: ProfileIcon})}
-          {loginInput({fieldType: "password", data: formData.password, placeholder: "Password", icon: LockIcon})}
+          <LoginInput fieldType="email" data={formData.email} placeholder="Email" icon={ProfileIcon} />
+          <LoginInput fieldType="password" data={formData.email} placeholder="Password" icon={LockIcon} />
           <button className={styles.enterButton} type="submit">Sign In</button>
         </form>
         <p>Don't have an account? <Link to="/signup">Sign up</Link></p>
@@ -94,7 +82,7 @@ export default function Login() {
       <section className={styles.desktopSection}>
         <div className={styles.centerSection}>
           <img src={SpiritIcon} alt="Spirit Icon" />
-          {loginBox()}
+          <LoginBox />
         </div>
         <Footer />
         </section>
