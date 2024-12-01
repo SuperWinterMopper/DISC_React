@@ -1,13 +1,25 @@
-import React, { useState, useEffect } from "react";
-import NoResultsBox from '../../components/NoResultsBox/NoResultsBox';
+import React, { useState } from "react";
+import { AuthProvider, useAuth } from '../../hooks/useSpiritAuth'; 
 
-export default function Test() {
-  const [token, setToken] = useState("");
-  const [protectedData, setProtectedData] = useState(null);
-  const [error, setError] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+function TesterComponent() {
+  const { isAuthenticated } = useAuth();
 
+  return isAuthenticated ? <div>You're authenticated</div> : <div>you're NOT authenticated</div>;
+}
+
+function Test() { 
+  return (
+    <AuthProvider>
+      <TesterComponent />
+    </AuthProvider>
+  );
+};
+
+export default Test;
+
+
+
+/*
   useEffect(() => {
     const hashParams = new URLSearchParams(window.location.hash.substring(1));
     const accessToken = hashParams.get("access_token");
@@ -82,12 +94,4 @@ export default function Test() {
       setError(err.message);
     }
   };
-
-    return (
-      <div>
-        Hello world
-        <NoResultsBox/>
-      </div>
-    
-  );
-}
+  */

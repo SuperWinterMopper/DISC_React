@@ -1,4 +1,4 @@
-import { Children, createContext, useContext } from "react"
+import { useState, children, createContext, useContext } from "react";
 
 const AuthContext = createContext(null);
 
@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
       token, 
       login,
       logout,
-      isAuthenticated: user === empty_user
+      isAuthenticated: !(user === empty_user)
     }}>
       { children }
     </AuthContext.Provider>
