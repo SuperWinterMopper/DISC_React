@@ -1,50 +1,15 @@
 import styles from './Login.module.css'
-import React, { useState, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 import { Link } from 'react-router-dom';
 import SpiritIcon from '../../assets/SpiritIcon/SpiritIconSVG.svg';
 import ProfileIcon from '../../assets/ProfileIcon/ProfileIconSVG';
 import LockIcon from '../../assets/LockIcon';
 import Footer from '../../components/Footer/Footer';
-import { AuthProvider, useAuth } from '../../hooks/useSpiritAuth'; 
-
-
+import { AuthProvider, useAuth } from '../../hooks/useAuth'; 
 
 export default function Login() {
   const [formData, setFormData] = useState({email: "", password: ""});
-
   const [token, setToken] = useState("");
-
-  // useEffect(() => {
-  //   const hashParams = new URLSearchParams(window.location.hash.substring(1));
-  //   const accessToken = hashParams.get("access_token");
-
-  //   if (accessToken) {
-  //     setToken(accessToken);
-  //     window.history.replaceState(null, "", window.location.pathname);
-  //   }
-  // }, []);
-
-  const handleSignIn = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch(`http://localhost:${process.env.REACT_APP_PORT}/users/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({ email: formData.email, password: formData.password }),
-      });
-
-      const data = await response.json();
-      if (data.error) throw new Error(data.error);
-
-      setToken(data.token);
-      console.log(token);
-    } catch (err) {
-      console.log(err.message);    
-    };
-  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -54,7 +19,7 @@ export default function Login() {
     }));
   };
 
-  function LoginInput(props) {
+  function loginInput(props) {
     return ( 
       <div className={styles.inputFieldBox}>
         <props.icon />
@@ -64,28 +29,65 @@ export default function Login() {
   };
 
   function LoginBox() {
+    const { login } = useAuth();
+    const handleSignIn = async (e) => {
+      e.preventDefault();
+      try {
+        const response = await fetch(`http://localhost:${process.env.REACT_APP_PORT}/users/login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({ email: formData.email, password: formData.password }),
+        });
+        
+        const data = await response.json();
+        if (data.error) throw new Error(data.error);
+        
+        setToken(data.token);
+        
+        const temp_user = {
+          first_name: "Jack",
+          last_name: "Day",
+          email: "jack@gamil.com",
+          profile_icon: "https://resources.tidal.com/images/2eaf0497/bcbd/45d5/bf9b/4e83e23b53b0/640x640.jpg",
+          followers: ["4","5","6"],
+          following: ["4","5","6"],
+          artist_tags: ["ABBA", "Kate Bush", "Gentle Giant"],
+          genre_tags: ["Prog Rock", "Art Pop"],
+          bio: "I like LOBSTERS."
+        };
+
+        login(temp_user, data.token);
+      } catch (err) {
+        console.log(err.message);
+      };
+    };
+
     return (
       <div className={styles.loginBox}>
         <h1>Login</h1>
         <form onSubmit={handleSignIn}>
-          <LoginInput fieldType="email" data={formData.email} placeholder="Email" icon={ProfileIcon} />
-          <LoginInput fieldType="password" data={formData.email} placeholder="Password" icon={LockIcon} />
+          {loginInput({fieldType: "email", data: formData.email, placeholder: "Email", icon: ProfileIcon})}          {loginInput({fieldType: "password", data: formData.password, placeholder: "Password", icon: LockIcon})}
           <button className={styles.enterButton} type="submit">Sign In</button>
         </form>
         <p>Don't have an account? <Link to="/signup">Sign up</Link></p>
       </div>
     );
-  }; 
+  };
 
   return (
-    <div className={styles.mainBody}>
-      <section className={styles.desktopSection}>
-        <div className={styles.centerSection}>
-          <img src={SpiritIcon} alt="Spirit Icon" />
-          <LoginBox />
-        </div>
-        <Footer />
+    <AuthProvider>
+      <div className={styles.mainBody}>
+        <section className={styles.desktopSection}>
+          <div className={styles.centerSection}>
+            <img src={SpiritIcon} alt="Spirit Icon" />
+            <LoginBox />
+          </div>
+          <Footer />
         </section>
-    </div>
+      </div>
+    </AuthProvider>
   );
-};
+}

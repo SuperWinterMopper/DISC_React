@@ -14,6 +14,7 @@ export const AuthProvider = ({ children }) => {
     genre_tags: [""],
     bio: ""
   };
+
   const [user, setUser] = useState(empty_user);
   const [token, setToken] = useState(null);
 
@@ -26,14 +27,14 @@ export const AuthProvider = ({ children }) => {
     setUser(empty_user);
     setToken(null);
   }
-
+  
   return (
     <AuthContext.Provider value={{
       user, 
       token, 
-      login,
+      login, 
       logout,
-      isAuthenticated: !(user === empty_user)
+      isAuthenticated: user !== empty_user
     }}>
       { children }
     </AuthContext.Provider>
