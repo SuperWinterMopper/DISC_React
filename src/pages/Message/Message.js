@@ -8,11 +8,11 @@ import Footer from '../../components/Footer/Footer';
 import NavigationBar from '../../components/NavigationBar/NavigationBar';
 
 
-function Message() {
+export default function Message() {
   const [searchQuery, setSearchQuery] = useState("");
   const { filteredUsers, loading } = useFilteredUsers(searchQuery, "Descending");
 
-  function searchFieldContent() {
+  function SearchFieldContent() {
     return ( 
       <div className="search-field">
         <h1>Message</h1>
@@ -24,7 +24,7 @@ function Message() {
     )
   }
 
-  function messagesField() {
+  function MessagesField() {
     if (loading) {return <LoadingBox/>}
     else if(filteredUsers.length === 0) {return <NoResultsBox search={searchQuery}/>}
     else {
@@ -32,9 +32,9 @@ function Message() {
         <div className="messagesField">
           {filteredUsers.map(user => message({key: user.key, username: user.username, message: user.bio, time: "9am", messageNum: 2, iconLink: user.iconLink}))}
         </div>
-      )
-    }
-  }
+      );
+    };
+  };
 
   function message(props) {
     return (
@@ -58,12 +58,10 @@ function Message() {
     <div className="main-body">
       <NavigationBar currentPage={"Message"}/>
       <section className='search-container'>
-        {searchFieldContent()}  
-        {messagesField()} 
+        <SearchFieldContent />
+        <MessagesField />        
       </section> 
       <Footer />
     </div>
   ); 
 }
-
-export default Message;

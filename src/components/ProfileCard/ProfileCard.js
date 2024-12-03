@@ -1,8 +1,13 @@
 import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
-const Profile = React.memo(function Profile({ username, matchness, iconLink, isFollowed, followChange }) {
+const Profile = React.memo(function Profile({ user, followedUsers, followChange }) {
   
+  const username = user.username;
+  const matchness = user.matchness;
+  const iconLink = user.iconLink;
+  const isFollowed = followedUsers.some(followed => followed.username === user.username);
+
   const changeFollow = useCallback(() => {
     followChange( username, isFollowed, {username, matchness, iconLink});
   }, [username, isFollowed, matchness, iconLink, followChange]);

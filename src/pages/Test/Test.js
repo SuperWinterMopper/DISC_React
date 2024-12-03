@@ -1,24 +1,5 @@
-// import React, { useState } from "react";
-// import { AuthProvider, useAuth } from '../../hooks/useSpiritAuth'; 
-
-// function TesterComponent() {
-//   const { isAuthenticated } = useAuth();
-
-//   return isAuthenticated ? <div>You're authenticated</div> : <div>you're NOT authenticated</div>;
-// }
-
-// function Test() { 
-//   return (
-//     <AuthProvider>
-//       <TesterComponent />
-//     </AuthProvider>
-//   );
-// };
-
-// export default Test;
-
 import styles from '../Authentication/Login.module.css';
-import React, { useState, useCallback, useMemo } from "react";
+import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import SpiritIcon from '../../assets/SpiritIcon/SpiritIconSVG.svg';
 import ProfileIcon from '../../assets/ProfileIcon/ProfileIconSVG';
@@ -27,26 +8,49 @@ import Footer from '../../components/Footer/Footer';
 import { AuthProvider, useAuth } from '../../hooks/useAuth'; 
 
 export default function Login() {
-  function AuthBlue() {
-    const { isAuthenticated } = useAuth();
-    if(isAuthenticated) return (<div>AUTHENTICATED</div>)
-    else return (<div>YOU AINT AUTHENTICATED</div>);
-  }
 
-  function WordBox() {
-    const { login } = useAuth();
-    return (
-      <div>
-        <p>Hello, this is WordBox</p>
-        <AuthBlue />
+  function LoginInput(props) {
+    return ( 
+      <div className={styles.inputFieldBox}>
+        <props.icon />
+        <input type={props.fieldType} name={props.fieldType}  placeholder={props.placeholder}/>
       </div>
     );
   };
 
+  function LoginBox() {
+    const { login } = useAuth();
+    
+    const handleSignIn = async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      login(formData);
+    };
+
+    return (
+      <div className={styles.loginBox}>
+        <h1>Login</h1>
+        <form onSubmit={handleSignIn}>
+          <LoginInput fieldType="email" placeholder="Email" icon={ProfileIcon}/>
+          <LoginInput fieldType="password" placeholder="Password" icon={LockIcon}/>
+          <button className={styles.enterButton} type="submit">Sign In</button>
+        </form>
+        <p>Don't have an account? <Link to="/signup">Sign up</Link></p>
+      </div>
+    );
+  };
 
   return (
     <AuthProvider>
-      <WordBox />
+      <div className={styles.mainBody}>
+        <section className={styles.desktopSection}>
+          <div className={styles.centerSection}>
+            <img src={SpiritIcon} alt="Spirit Icon" />
+            <LoginBox />
+          </div>
+          <Footer />
+        </section>
+      </div>
     </AuthProvider>
   );
 };

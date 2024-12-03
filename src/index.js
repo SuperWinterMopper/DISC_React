@@ -16,8 +16,12 @@ import SignUp from './pages/Authentication/SignUp'
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: <Login />,
     errorElement: <NotFound />,
+  },
+  {
+    path: '/app',
+    element: <App />,
   },
   {
     path: '/profile',

@@ -19,12 +19,12 @@ import styles from './Profile.module.css'
         setUserData(this_user);
       } catch (error) {
         console.log(error.message);
-      }
-    }
+      };
+    };
     fetchUserData();
   }, [profileName]) 
 
-  function statistic(props) {
+  function Statistic(props) {
     return (
       <div className={styles.statistic}>
         <h3>{props.num}</h3>
@@ -33,7 +33,7 @@ import styles from './Profile.module.css'
     );
   };
 
-  function profileBannerInfo(props) {
+  function ProfileBannerInfo(props) {
     return (    
       <div className={styles.profileInfoContainer}>
         <div className={styles.profilePicture}>
@@ -43,9 +43,9 @@ import styles from './Profile.module.css'
           <h1>{props.user.first_name + " "+ props.user.last_name}</h1>
           <h2>{props.user.email}</h2>
           <div className={styles.statisticsField}>
-            {statistic({num: props.user.artist_tags.length + props.user.genre_tags.length, type: "Tags"})}
-            {statistic({num: props.user.following.length, type: "Following"})}
-            {statistic({num: props.user.followers.length, type: "Followers"})}
+            <Statistic num={props.user.artist_tags.length + props.user.genre_tags.length} type="Tags"/>
+            <Statistic num={props.user.following.length} type="Following" />
+            <Statistic num={props.user.followers.length} type="Followers" />
           </div>
           <p>{props.user.bio}</p>
         </div>
@@ -90,12 +90,12 @@ import styles from './Profile.module.css'
     <div className={styles.mainBody}>
       <div className={styles.profileBanner}>
       <NavigationBar currentPage={"OtherUser"}/>
-      {profileBannerInfo({user: userData})}
+      <ProfileBannerInfo user={userData} />
       </div>
       <div className={styles.tagsContainer}>
         <h2>Tags</h2>
-        {Tags({type: "Artists", list: userData.artist_tags})}
-        {Tags({type: "Genres", list: userData.genre_tags})}
+        <Tags type="Artists" list={userData.artist_tags} />
+        <Tags type="Genres" list={userData.genre_tags} />
       </div>
       <Footer />
   </div>

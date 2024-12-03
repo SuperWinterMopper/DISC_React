@@ -19,7 +19,7 @@ const genres = ["Vaporwave", "Chillwave", "Dungeon Synth", "Synthwave", "Darkwav
     )
   }
 
-  function profileBannerInfo(props) {
+  function ProfileBannerInfo(props) {
     return (    
       <div className={styles.profileInfoContainer}>
         <div className={styles.profilePicture}>
@@ -61,18 +61,16 @@ const genres = ["Vaporwave", "Chillwave", "Dungeon Synth", "Synthwave", "Darkwav
   
   return (
     <div className={styles.mainBody}>
-    {/* <section className={styles.desktopSectionProfile}> */}
       <div className={styles.profileBanner}>
-      <NavigationBar currentPage={"Profile"}/>
-      {profileBannerInfo()}
+        <NavigationBar currentPage={"Profile"}/>
+        <ProfileBannerInfo />
       </div>
       <div className={styles.tagsContainer}>
         <h2>Tags</h2>
-        {Tags({type: "Artists", list: artists})}
-        {Tags({type: "Genres", list: genres})}
+        <Tags type="Artists" list={artists} />
+        <Tags type="Genres" list={genres} />
       </div>
       <Footer />
-      {/* </section> */}
   </div>
   );
 }

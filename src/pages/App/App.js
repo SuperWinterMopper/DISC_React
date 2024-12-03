@@ -20,7 +20,7 @@ export default function App() {
     else setSortStyle("Descending");
   }, [sortStyle]);
   
-  function searchFieldContent() {
+  function SearchFieldContent() {
     return ( 
       <div className="search-field">
         <h1>Search</h1>
@@ -42,7 +42,7 @@ export default function App() {
     }
   }, []); 
 
-  function usersField() {
+  function UsersField() {
     if(loading) {return <LoadingBox/>}
     else if(filteredUsers.length === 0) {return <NoResultsBox search={searchQuery} />}
     else {
@@ -50,14 +50,9 @@ export default function App() {
         <div className="users-field">
           {filteredUsers.map(user => (<Profile 
             key={user.key}
-            username={user.username}
-            matchness={user.matchness}
-            iconLink={user.iconLink}
-            isFollowed={followedUsers.some(followed => followed.username === user.username)}
-            followChange={() => changeFollow({
-              username: user.username,
-              isFollowed: followedUsers.some(followed => followed.username === user.username),
-              userData: {username: user.username, matchness: user.matchness, iconLink: user.iconLink}})}
+            user={user}
+            followedUsers={followedUsers}
+            followChange={() => changeFollow({username: user.username, isFollowed: followedUsers.some(followed => followed.username === user.username), userData: {username: user.username, matchness: user.matchness, iconLink: user.iconLink}})}
             />
           ))}
         </div>
@@ -68,11 +63,11 @@ export default function App() {
   return (
     <div className="main-body">
       <NavigationBar currentPage={"Search"}/>
-      <section className='search-container'>
-        {searchFieldContent()}
-        {usersField()}
+      <section className="search-container">
+        <SearchFieldContent />
+        <UsersField />
       </section>
       <Footer />
     </div>
   ); 
-}
+};

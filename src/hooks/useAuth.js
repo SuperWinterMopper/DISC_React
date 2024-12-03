@@ -1,4 +1,7 @@
-import { useState, children, createContext, useContext, useEffect } from "react";
+import { useState, createContext, useContext, useEffect } from "react";
+import { createClient } from '@supabase/supabase-js';
+
+const supabase = createClient(process.env.REACT_APP_SUPABASE_URL, process.env.REACT_APP_SUPABASE_ANON_KEY);
 
 const AuthContext = createContext(null);
 
@@ -16,18 +19,51 @@ export const AuthProvider = ({ children }) => {
   };
   const [user, setUser] = useState(empty_user);
   const [token, setToken] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    console.log("User: ", user);
-    console.log("Token: ", token);
-  }, [user, token])
+    const verifyAuth = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session) {
+          setUser(session.user);
+          setToken(session.access_token);
+          setIsAuthenticated(true);
+        } else {
+          setUser(empty_user);
+          setToken(null);
+          setIsAuthenticated(false);
+        }
+      } catch (error) {
+        console.error('Authentication verification failed:', error);
+        setUser(empty_user);
+        setToken(null);
+        setIsAuthenticated(false);
+      } 
+    };
 
-  // function login(userData, authToken) {
-  //   setUser(userData);
-  //   setToken(authToken);
-  // }
+    verifyAuth();
 
-  const login = async (userData, authToken) => {
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        if (event === 'SIGNED_IN') {
+          setUser(session.user);
+          setToken(session.access_token);
+          setIsAuthenticated(true);
+        } else if (event === 'SIGNED_OUT') {
+          setUser(empty_user);
+          setToken(null);
+          setIsAuthenticated(false);
+        }
+      }
+    );
+
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, []);
+
+  const login = async (userData) => {
     try {
       const response = await fetch(`http://localhost:${process.env.REACT_APP_PORT}/users/login`, {
         method: "POST",
@@ -42,18 +78,11 @@ export const AuthProvider = ({ children }) => {
       if (data.error) throw new Error(data.error);
       else {
         const temp_user = {
-          first_name: "Jack",
-          last_name: "Day",
           email: userData.get("email"),
-          profile_icon: "https://resources.tidal.com/images/2eaf0497/bcbd/45d5/bf9b/4e83e23b53b0/640x640.jpg",
-          followers: ["4","5","6"],
-          following: ["4","5","6"],
-          artist_tags: ["ABBA", "Kate Bush", "Gentle Giant"],
-          genre_tags: ["Prog Rock", "Art Pop"],
-          bio: "I like LOBSTERS."
         };
         setUser(temp_user);
-        setToken(authToken);  
+        setToken(data.token);  
+        setIsAuthenticated(true); 
       }
     } catch (err) {
       console.log(err.message);
@@ -71,7 +100,7 @@ export const AuthProvider = ({ children }) => {
       token, 
       login, 
       logout,
-      isAuthenticated: user !== empty_user
+      isAuthenticated,
     }}>
       { children }
     </AuthContext.Provider>
