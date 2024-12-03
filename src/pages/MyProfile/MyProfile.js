@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import React from "react";
 import MagnifyingGlassIcon from '../../assets/MagnifyingGlassIcon';
 import Footer from '../../components/Footer/Footer';
 import NavigationBar from '../../components/NavigationBar/NavigationBar';
@@ -10,7 +9,7 @@ const artists = ["Death Grips", "Arca", "Oneohtrix Point Never", "Vangelis", "Th
 const genres = ["Vaporwave", "Chillwave", "Dungeon Synth", "Synthwave", "Darkwave", "Drone Metal", "Space Rock", "Post-Rock", "Shoegaze", "Math Rock", "Sludge Metal", "Electropunk", "Folk Metal", "Avant-Garde Jazz", "Blackgaze", "Trip-Hop", "Neoclassical Darkwave", "Breezeway Pop", "Witch House", "Psychedelic Trance"];
 
   export default function Me() {
-  function statistic(props) {
+  function Statistic(props) {
     return (
       <div className={styles.statistic}>
         <h3>{props.num}</h3>
@@ -19,7 +18,7 @@ const genres = ["Vaporwave", "Chillwave", "Dungeon Synth", "Synthwave", "Darkwav
     )
   }
 
-  function ProfileBannerInfo(props) {
+  function ProfileBannerInfo() {
     return (    
       <div className={styles.profileInfoContainer}>
         <div className={styles.profilePicture}>
@@ -29,9 +28,9 @@ const genres = ["Vaporwave", "Chillwave", "Dungeon Synth", "Synthwave", "Darkwav
           <h1>Acton Healy</h1>
           <h2>@myemail123456789@gmail.com</h2>
           <div className={styles.statisticsField}>
-            {statistic({num: 40, type: "Tags"})}
-            {statistic({num: 28, type: "Following"})}
-            {statistic({num: 23, type: "Followers"})}
+            <Statistic num={40} type="Tags" />
+            <Statistic num={28} type="Following" />
+            <Statistic num={23} type="Followers" />
           </div>
           <p>Hi hope you're having an endurable day :)</p>
         </div>

@@ -7,7 +7,6 @@ import useFilteredUsers from '../../hooks/useFilteredUsers';
 import Footer from '../../components/Footer/Footer';
 import NavigationBar from '../../components/NavigationBar/NavigationBar';
 
-
 export default function Message() {
   const [searchQuery, setSearchQuery] = useState("");
   const { filteredUsers, loading } = useFilteredUsers(searchQuery, "Descending");
@@ -18,7 +17,7 @@ export default function Message() {
         <h1>Message</h1>
         <div className="search-bar">
             <input type="text" placeholder="Search messages..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} style={{marginLeft: '52px'}}></input>
-            {<MagnifyingGlassIcon />}
+            <MagnifyingGlassIcon />
         </div>
       </div> 
     )

@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
-const Profile = React.memo(function Profile({ user, followedUsers, followChange }) {
+const ProfileCard = React.memo(function Profile({ user, followedUsers, followChange }) {
   
   const username = user.username;
   const matchness = user.matchness;
@@ -36,4 +36,4 @@ const Profile = React.memo(function Profile({ user, followedUsers, followChange 
   );
 });
 
-export default Profile;
+export default ProfileCard;
