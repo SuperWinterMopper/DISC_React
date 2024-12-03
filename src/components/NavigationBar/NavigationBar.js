@@ -29,7 +29,7 @@ export default function NavigationBar({ currentPage }) {
     <nav-bar>
       <SpiritIcon />
       <NavbarButton text="Search" to="/app" />       
-      <NavbarButton text="Profile" to="/Me" />       
+      <NavbarButton text="Profile" to="/MyProfile" />       
       <NavbarButton text="Message" to="/Message" />     
     </nav-bar>
   );

@@ -4,7 +4,7 @@ import MagnifyingGlassIcon from '../../assets/MagnifyingGlassIcon';
 import LoadingBox from '../../components/LoadingBox/LoadingBox';
 import Footer from '../../components/Footer/Footer';
 import NavigationBar from '../../components/NavigationBar/NavigationBar';
-import styles from './Profile.module.css'
+import styles from './OtherProfile.module.css'
 
   export default function Profile() {
   const [userData, setUserData] = useState(null);

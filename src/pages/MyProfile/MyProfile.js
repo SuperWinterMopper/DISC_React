@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import MagnifyingGlassIcon from '../../assets/MagnifyingGlassIcon';
 import Footer from '../../components/Footer/Footer';
 import NavigationBar from '../../components/NavigationBar/NavigationBar';
-import styles from './Me.module.css'
+import styles from './MyProfile.module.css'
 
 const artists = ["Death Grips", "Arca", "Oneohtrix Point Never", "Vangelis", "The Caretaker", "Dälek", "John Maus", "Shabazz Palaces", "Tim Hecker", "Grouper", "Björk", "Sun O)))", "Lorenzo Senni", "Kaitlyn Aurelia Smith", "Mary Lattimore", "Avey Tare", "Scott Walker", "Zola Jesus", "Andy Stott", "Fennesz"];
 
 const genres = ["Vaporwave", "Chillwave", "Dungeon Synth", "Synthwave", "Darkwave", "Drone Metal", "Space Rock", "Post-Rock", "Shoegaze", "Math Rock", "Sludge Metal", "Electropunk", "Folk Metal", "Avant-Garde Jazz", "Blackgaze", "Trip-Hop", "Neoclassical Darkwave", "Breezeway Pop", "Witch House", "Psychedelic Trance"];
 
-  export default function Profile() {
+  export default function Me() {
   function statistic(props) {
     return (
       <div className={styles.statistic}>
@@ -50,7 +50,7 @@ const genres = ["Vaporwave", "Chillwave", "Dungeon Synth", "Synthwave", "Darkwav
       <div className={styles.tagsField}>
         <div className={styles.tagTyp}>
           <h2>{props.type}</h2>
-          {<MagnifyingGlassIcon />}
+          <MagnifyingGlassIcon />
         </div>
         <div className={styles.tagsList}>
           {props.list.map(item => <Tag itemName={item} />)}

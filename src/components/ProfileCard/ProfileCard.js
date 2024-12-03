@@ -20,7 +20,7 @@ const Profile = React.memo(function Profile({ user, followedUsers, followChange 
 
   return (
     <div className="user" id={isFollowed ? "followedUser" : ""}>
-      <Link to={`/profile/${username}`}>
+      <Link to={`/otherprofile/${username}`}>
         <div className='user-icon'>
           <img src={iconLink} alt="User Icon"/>
         </div>

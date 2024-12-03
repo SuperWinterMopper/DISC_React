@@ -5,11 +5,11 @@ import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import App from './pages/App/App';
-import Profile from './pages/Profile/Profile';
+import OtherProfile from './pages/OtherProfile/OtherProfile';
 import NotFound from './pages/NotFound/NotFound'
 import Message from './pages/Message/Message';
 import Test from './pages/Test/Test';
-import Me from './pages/Me/Me';
+import MyProfile from './pages/MyProfile/MyProfile';
 import Login from './pages/Authentication/Login';
 import SignUp from './pages/Authentication/SignUp'
 
@@ -24,12 +24,8 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: '/profile',
-    element: <Profile />,
-  },
-  {
-    path: '/profile/:profileID',
-    element: <Profile />,
+    path: '/otherProfile/:profileID',
+    element: <OtherProfile />,
   },
   {
     path: '/message',
@@ -40,8 +36,8 @@ const router = createBrowserRouter([
     element: <Test />,
   },
   {
-    path: '/me',
-    element: <Me />
+    path: '/myprofile',
+    element: <MyProfile />
   },
   {
     path: '/login',
